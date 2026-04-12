@@ -5,9 +5,9 @@
 #include "unk_020971F8.h"
 
 static const UnkStruct_0203AC88 sUnkTable_0203AC88[] = {
-    { sub_02097238, sub_02097230, NULL },
-    { sub_02097248, sub_0209722C, NULL },
-    { sub_02097258, sub_02097234, NULL },
+    { (UnkFuncPtr_0203AC88)sub_02097238, (UnkFuncPtr_0203AC88)sub_02097230, NULL },
+    { (UnkFuncPtr_0203AC88)sub_02097248, (UnkFuncPtr_0203AC88)sub_0209722C, NULL },
+    { (UnkFuncPtr_0203AC88)sub_02097258, (UnkFuncPtr_0203AC88)sub_02097234, NULL },
 };
 
 const UnkStruct_0203AC88 *sub_0203AC88(void) {
