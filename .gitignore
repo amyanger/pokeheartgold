@@ -81,6 +81,9 @@ cmake-build-*
 # MacOS garbage
 .DS_Store
 
+# Manual scratch backups
+*.bak
+
 # Depfiles
 *.d
 
