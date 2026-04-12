@@ -35,7 +35,7 @@ BOOL LegendaryCinematic_Init(OverlayManager *man, int *state) {
 
 BOOL LegendaryCinematic_Main(OverlayManager *man, int *state) {
     LegendaryCinematicData *data = OverlayManager_GetData(man);
-    if (sLegendaryCinematicFuncs[data->args->unk4C](data->args) == 0) {
+    if (sLegendaryCinematicFuncs[data->args->unk4C]((LegendaryCinematicArgs *)data) == 0) {
         return TRUE;
     }
     return FALSE;

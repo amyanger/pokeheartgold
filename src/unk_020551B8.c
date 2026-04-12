@@ -14,7 +14,7 @@ typedef struct {
     int state;
     int result;
     int effect;
-    u16 bgm;
+    int bgm;
 } UnkStruct_020551B8;
 
 static BOOL sub_020551B8(TaskManager *man) {
