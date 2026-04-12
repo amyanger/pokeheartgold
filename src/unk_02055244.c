@@ -10,7 +10,7 @@
 
 static BOOL sub_02055244(TaskManager *taskManager) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
-    if (sub_0203DF7C(fieldSystem) != 0) {
+    if (sub_0203DF7C(fieldSystem) == 0) {
         return TRUE;
     }
     return FALSE;
@@ -28,7 +28,7 @@ void CallTask_LeaveOverworld(TaskManager *taskManager) {
 
 static BOOL sub_0205528C(TaskManager *taskManager) {
     FieldSystem *fieldSystem = TaskManager_GetFieldSystem(taskManager);
-    if (sub_020505C8(fieldSystem) == 0) {
+    if (sub_020505C8(fieldSystem) != 0) {
         return TRUE;
     }
     return FALSE;
