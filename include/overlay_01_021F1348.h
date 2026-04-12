@@ -7,9 +7,11 @@
 #include "unk_020689C8.h"
 
 typedef struct {
-    u8 unk0[0xc];
+    u32 loaded;
+    void *mdlData;
+    NNSG3dResMdlSet *mdlSet;
     NNSG3dResMdl *unkC;
-    u8 unk10[4];
+    NNSG3dResTex *tex;
 } UnkOv01_021FFECC_sub;
 
 typedef struct {
