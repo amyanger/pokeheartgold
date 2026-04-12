@@ -13,15 +13,15 @@
 
 static SAV_FRIEND_GRP *sSavFriendGrp;
 
-static BOOL sub_0202C8C4(FRIEND_GROUP *group);
-static BOOL sub_0202C8E4(FRIEND_GROUP *g1, FRIEND_GROUP *g2);
+BOOL sub_0202C8C4(FRIEND_GROUP *group);
+BOOL sub_0202C8E4(FRIEND_GROUP *g1, FRIEND_GROUP *g2);
 
 u32 Save_FriendGroup_sizeof(void) {
     return sizeof(SAV_FRIEND_GRP);
 }
 
-void sub_0202C738(SAV_FRIEND_GRP *savFriendGrp, u16 dstIdx, int srcIdx) {
-    savFriendGrp->groups[srcIdx] = savFriendGrp->groups[dstIdx];
+void sub_0202C738(SAV_FRIEND_GRP *savFriendGrp, u16 srcIdx, int dstIdx) {
+    savFriendGrp->groups[dstIdx] = savFriendGrp->groups[srcIdx];
 }
 
 void Save_FriendGroup_Init(SAV_FRIEND_GRP *savFriendGrp) {
@@ -35,8 +35,8 @@ void Save_FriendGroup_Init(SAV_FRIEND_GRP *savFriendGrp) {
     sSavFriendGrp = savFriendGrp;
 }
 
-void sub_0202C78C(SAV_FRIEND_GRP *savFriendGrp, int count) {
-    int i, j;
+void sub_0202C78C(SAV_FRIEND_GRP *savFriendGrp, u32 count) {
+    u32 i, j;
 
     for (i = 0; i < FGRP_MAX; i++) {
         for (j = 0; j < count; j++) {
@@ -118,7 +118,7 @@ BOOL sub_0202C88C(SAV_FRIEND_GRP *savFriendGrp, u16 *name) {
     return FALSE;
 }
 
-static BOOL sub_0202C8C4(FRIEND_GROUP *group) {
+BOOL sub_0202C8C4(FRIEND_GROUP *group) {
     if (group->unk_0[0] == 0xFFFF) {
         return TRUE;
     }
@@ -128,7 +128,7 @@ static BOOL sub_0202C8C4(FRIEND_GROUP *group) {
     return FALSE;
 }
 
-static BOOL sub_0202C8E4(FRIEND_GROUP *g1, FRIEND_GROUP *g2) {
+BOOL sub_0202C8E4(FRIEND_GROUP *g1, FRIEND_GROUP *g2) {
     if (StringNotEqualN(g1->unk_10, g2->unk_10, 8)) {
         return FALSE;
     }

@@ -4,7 +4,7 @@
 #include "friend_group.h"
 
 void sub_0202C7C0(SAV_FRIEND_GRP *saveGrp, u32 grpIdx, u32 a2);
-void sub_0202C78C(SAV_FRIEND_GRP *saveGrp, int a1);
+void sub_0202C78C(SAV_FRIEND_GRP *saveGrp, u32 a1);
 BOOL sub_0202C860(SAV_FRIEND_GRP *group, u16 a1);
 BOOL sub_0202C878(SAV_FRIEND_GRP *group, u16 a1);
 void sub_0202C738(SAV_FRIEND_GRP *group, u16 a1, int a2);
