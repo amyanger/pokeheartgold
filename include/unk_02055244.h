@@ -4,6 +4,7 @@
 #include "task.h"
 
 void CallTask_LeaveOverworld(TaskManager *taskManager);
+void CallTask_RestoreOverworld(TaskManager *taskManager);
 void PaletteFadeUntilFinished(TaskManager *taskManager);
 void CallTask_FadeFromBlack(TaskManager *taskManager);
 void sub_020553B0(TaskManager *taskManager);
