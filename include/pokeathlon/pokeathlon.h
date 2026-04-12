@@ -90,7 +90,11 @@ struct PokeathlonCourseData {
     u8 dataCopySource[0x28];                   // 0x28C - Source buffer for exit data copy
     u8 dataCopyBuffer1[0x28];                  // 0x2B4 - Destination buffer 1
     u8 dataCopyBuffer2[0x28];                  // 0x2DC - Destination buffer 2
-    u8 filler_304[0xB0];                       // 0x304
+    u8 filler_304[0xA0];                       // 0x304
+    u32 field_3A4;                             // 0x3A4 - State transition field (0xe9<<2)
+    u32 field_3A8;                             // 0x3A8 - State transition field (0xea<<2)
+    u32 field_3AC;                             // 0x3AC - State transition field
+    u32 field_3B0;                             // 0x3B0 - State transition active flag
     PokeathlonCourseState courseState;         // 0x3B4 - State machine structure (16 bytes: 4 fields x 4 bytes)
     PokeathlonStateInfo stateInfo;             // 0x3C4 - State information (8 bytes)
     u8 filler_3CC[0xC];                        // 0x3CC
@@ -163,5 +167,22 @@ PlayerProfile *ov96_021E5F34(PokeathlonCourseData *data, int index);
 void *ov96_021E5F44(PokeathlonCourseData *data, int index);
 u8 *ov96_021E5F54(PokeathlonCourseData *data);
 void ov96_021E5F5C(PokeathlonCourseData *data);
+
+// Overlay 96 phase 2 — pokeathlon_course_util.c (15 more functions)
+void ov96_021E5F70(PokeathlonCourseData *data, u32 a1, u32 a2, u32 a3);
+void ov96_021E5F8C(PokeathlonCourseData *data);
+u32 ov96_021E5FA4(PokeathlonCourseData *data);
+u32 ov96_021E5FAC(void);
+void ov96_021E5FB0(PokeathlonCourseData *data, int index, u16 value);
+u16 ov96_021E5FBC(PokeathlonCourseData *data, int index);
+void ov96_021E5FC8(PokeathlonCourseData *data, u8 value);
+void ov96_021E5FEC(PokeathlonCourseData *data, u8 value, u8 compare);
+void ov96_021E601C(PokeathlonCourseData *data, u32 value);
+void ov96_021E6030(PokeathlonCourseData *data);
+void *ov96_021E6040(PokeathlonCourseData *data);
+void ov96_021E604C(PokeathlonCourseData *data);
+void *ov96_021E60C0(PokeathlonCourseData *data, int a1, int a2);
+void *ov96_021E60D8(PokeathlonCourseData *data, int a1, int a2);
+u32 ov96_021E6104(void);
 
 #endif // POKEHEARTGOLD_POKEATHLON_H

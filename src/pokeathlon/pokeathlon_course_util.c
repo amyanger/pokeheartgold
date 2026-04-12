@@ -5,10 +5,14 @@
 #include "pokeathlon/pokeathlon.h"
 
 #include "assert.h"
+#include "filesystem.h"
 #include "player_data.h"
+#include "system.h"
 
 extern BOOL ov96_021E8828(void *system);
 extern const u8 ov96_0221A934[];
+extern void ov96_021E75BC(void *data);
+extern u16 ov96_021E679C(u16 a, u16 b);
 
 // ov96_021E5E04 — Initialize participant order array from external data, run pattern match
 void ov96_021E5E04(PokeathlonCourseData *data, const u8 *participantOrder) {
@@ -192,4 +196,127 @@ u8 *ov96_021E5F54(PokeathlonCourseData *data) {
 // ov96_021E5F5C — Clear dataCopySource area
 void ov96_021E5F5C(PokeathlonCourseData *data) {
     MI_CpuFill8(data->dataCopySource, 0, 0x128);
+}
+
+// ov96_021E5F70 — Initialize state transition fields
+void ov96_021E5F70(PokeathlonCourseData *data, u32 a1, u32 a2, u32 a3) {
+    data->field_3A4 = a1;
+    data->field_3A8 = a2;
+    data->field_3AC = a3;
+    data->field_3B0 = 1;
+}
+
+// ov96_021E5F8C — Clear state transition fields
+void ov96_021E5F8C(PokeathlonCourseData *data) {
+    data->field_3A4 = 0;
+    data->field_3A8 = 0;
+    data->field_3AC = 0;
+    data->field_3B0 = 0;
+}
+
+// ov96_021E5FA4 — Get field_3A8
+u32 ov96_021E5FA4(PokeathlonCourseData *data) {
+    return data->field_3A8;
+}
+
+// ov96_021E5FAC — Return constant 4
+u32 ov96_021E5FAC(void) {
+    return 4;
+}
+
+// ov96_021E5FB0 — Write u16 into area at 0x5E0 with stride 4
+void ov96_021E5FB0(PokeathlonCourseData *data, int index, u16 value) {
+    *(u16 *)((u8 *)data + index * 4 + 0x5E0) = value;
+}
+
+// ov96_021E5FBC — Read u16 from area at 0x5F0 with stride 4
+u16 ov96_021E5FBC(PokeathlonCourseData *data, int index) {
+    return *(u16 *)((u8 *)data + index * 4 + 0x5F0);
+}
+
+// ov96_021E5FC8 — Set state transition with exit-flag assertion
+void ov96_021E5FC8(PokeathlonCourseData *data, u8 value) {
+    if (data->courseState.exitFlag == 1) {
+        GF_ASSERT(FALSE);
+    }
+    data->courseState.exitFlag = 1;
+    ((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 = value;
+}
+
+// ov96_021E5FEC — Conditional state transition
+void ov96_021E5FEC(PokeathlonCourseData *data, u8 value, u8 compare) {
+    if (((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 == compare) {
+        return;
+    }
+    if (data->courseState.exitFlag == 1) {
+        GF_ASSERT(FALSE);
+    }
+    data->courseState.exitFlag = 1;
+    ((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 = value;
+}
+
+// ov96_021E601C — Set courseState.transitionType if args->mode == 1
+void ov96_021E601C(PokeathlonCourseData *data, u32 value) {
+    if (data->args->mode == 1) {
+        data->courseState.transitionType = value;
+    }
+}
+
+// ov96_021E6030 — Register V-blank callback
+void ov96_021E6030(PokeathlonCourseData *data) {
+    Main_SetVBlankIntrCB(ov96_021E75BC, data);
+}
+
+// ov96_021E6040 — Get graphicsSystem pointer
+void *ov96_021E6040(PokeathlonCourseData *data) {
+    return data->graphicsSystem;
+}
+
+// ov96_021E604C — Load course data from NARC archive
+void ov96_021E604C(PokeathlonCourseData *data) {
+    NARC *narc;
+    PokeathlonCourseData *currentParticipant;
+    int i;
+    u8 *currentDest;
+    int j;
+
+    narc = NARC_New((NarcId)0xa9, data->heapId);
+    currentParticipant = data;
+    i = 0;
+    currentDest = (u8 *)data + 0x618;
+
+    for (; i < 4; i++) {
+        PokeathlonCourseData *p = currentParticipant;
+        u8 *d = currentDest;
+        for (j = 0; j < 3; j++) {
+            u16 memberId = ov96_021E679C(
+                *(u16 *)((u8 *)p + 0x3F0),
+                *(u16 *)((u8 *)p + 0x3F2)
+            );
+            NARC_ReadWholeMember(narc, memberId, d);
+            p = (PokeathlonCourseData *)((u8 *)p + 0x28);
+            d += 0x14;
+        }
+        currentParticipant = (PokeathlonCourseData *)((u8 *)currentParticipant + 0x7c);
+        currentDest += 0x3c;
+    }
+
+    NARC_Delete(narc);
+}
+
+// ov96_021E60C0 — Calculate course data address (data + 0x618 + a1*0x3c + a2*0x14)
+void *ov96_021E60C0(PokeathlonCourseData *data, int a1, int a2) {
+    return (u8 *)data + 0x618 + a1 * 0x3c + a2 * 0x14;
+}
+
+// ov96_021E60D8 — Participant extended data with bounds checks
+void *ov96_021E60D8(PokeathlonCourseData *data, int a1, int a2) {
+    GF_ASSERT(a1 < 4);
+    GF_ASSERT(a2 < 3);
+    return (u8 *)data + 0x3F8 + a1 * 0x7c + a2 * 0x28;
+}
+
+// ov96_021E6104 — Return constant 0x50
+u32 ov96_021E6104(void) {
+    return 0x50;
 }
