@@ -16,11 +16,11 @@
 
 void sub_02069660(UnkOv01_021FFECC_sub *data) {
     u8 *p = (u8 *)data;
-    int i;
+    u32 i = 0x14;
 
-    for (i = 0x14; i != 0; i--) {
+    do {
         *p++ = 0;
-    }
+    } while (--i);
 }
 
 void sub_02069670(UnkOv01_021FFECC_sub *data, void *mdlData, int mdlIndex) {
@@ -68,8 +68,7 @@ void sub_02069744(UnkOv01_021FFECC_sub *data) {
         NNS_G3dTexReleaseTexKey(data->tex, &texKey, &tex4x4Key);
         (*NNS_GfdDefaultFuncFreeTexVram)(texKey);
         (*NNS_GfdDefaultFuncFreeTexVram)(tex4x4Key);
-        NNS_G3dPlttReleasePlttKey(data->tex);
-        (*NNS_GfdDefaultFuncFreePlttVram)(0);
+        (*NNS_GfdDefaultFuncFreePlttVram)(NNS_G3dPlttReleasePlttKey(data->tex));
         data->tex = NULL;
     }
 }
