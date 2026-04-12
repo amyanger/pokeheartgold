@@ -9,18 +9,18 @@ static const u16 sMapsecTypeBoundaries[] = {
     METLOC_LOVELY_PLACE,
 };
 
-int sub_02017FAC(int mapsec) {
+int sub_02017FAC(u32 mapsec) {
     int i;
 
     for (i = 0; i < 2; i++) {
-        if ((u16)mapsec < sMapsecTypeBoundaries[i + 1]) {
+        if (mapsec < sMapsecTypeBoundaries[i + 1]) {
             return i;
         }
     }
     return i;
 }
 
-int sub_02017FCC(int mapsec) {
+int sub_02017FCC(u32 mapsec) {
     int type = sub_02017FAC(mapsec);
     return mapsec - sMapsecTypeBoundaries[type];
 }
@@ -31,14 +31,7 @@ int sub_02017FE4(MapsecType type, int offset) {
 }
 
 BOOL LocationIsDiamondPearlCompatible(mapsec_t mapsec) {
-    if (mapsec >= MAPSEC_TWINLEAF_TOWN && mapsec <= MAPSEC_BATTLE_PARK) {
-        return TRUE;
-    }
-    if (mapsec >= METLOC_DAY_CARE_COUPLE && mapsec <= METLOC_RILEY) {
-        return TRUE;
-    }
-    if (mapsec >= METLOC_LOVELY_PLACE && mapsec <= METLOC_CONCERT_EVENT) {
-        return TRUE;
-    }
-    return FALSE;
+    return (mapsec >= MAPSEC_TWINLEAF_TOWN && mapsec <= MAPSEC_BATTLE_PARK)
+        || (mapsec >= METLOC_DAY_CARE_COUPLE && mapsec <= METLOC_RILEY)
+        || (mapsec >= METLOC_LOVELY_PLACE && mapsec <= METLOC_CONCERT_EVENT);
 }

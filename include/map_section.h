@@ -12,8 +12,8 @@ typedef enum MapsecType {
     MAPSECTYPE_MAX
 } MapsecType;
 
-int sub_02017FAC(int mapsec);
-int sub_02017FCC(int mapsec);
+int sub_02017FAC(u32 mapsec);
+int sub_02017FCC(u32 mapsec);
 int sub_02017FE4(MapsecType type, int offset);
 BOOL LocationIsDiamondPearlCompatible(mapsec_t mapsec);
 
