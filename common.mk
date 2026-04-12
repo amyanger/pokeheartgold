@@ -152,11 +152,22 @@ DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 patch_mwasmarm:
 	$(ASPATCH) -q $(MWAS)
 
+ifneq ($(WINPATH),)
+# Defined unconditionally (not gated on NODEP) so RESPONSE_TEMPLATE_NT below
+# is always valid when running under wine.
+PROJECT_ROOT_NT := $(shell $(WINPATH) -w $(PROJECT_ROOT) | $(SED) 's/\\/\//g')
+endif
+
 ifeq ($(NODEP),)
 ifneq ($(WINPATH),)
-PROJECT_ROOT_NT := $(shell $(WINPATH) -w $(PROJECT_ROOT) | $(SED) 's/\\/\//g')
+# The `I` flag on the final substitution is required on macOS: APFS is
+# case-insensitive, so wine's Z: drive resolution lowercases path segments
+# (e.g. `Z:/Users/foo/documents/dev/...`) even though the real FS path has
+# `Documents/Dev/...`. GNU sed (and gsed on Darwin) support `I` for case-
+# insensitive matching; both Linux and macOS paths through this macro use
+# GNU sed (see platform.mk), so this is portable.
 define fixdep
-$(SED) -i 's/\r//g; s/\\/\//g; s/\/$$/\\/g; s#$(PROJECT_ROOT_NT)#$(PROJECT_ROOT)#g' $(1)
+$(SED) -i 's/\r//g; s/\\/\//g; s/\/$$/\\/g; s#$(PROJECT_ROOT_NT)#$(PROJECT_ROOT)#gI' $(1)
 touch -r $(1:%.d=%.o) $(1)
 endef
 else
