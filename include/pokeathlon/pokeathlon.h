@@ -76,7 +76,7 @@ struct PokeathlonCourseData {
     u8 filler_1E8[0x5];                        // 0x1E8
     u8 field_1ED;                              // 0x1ED
     u8 participantCount;                       // 0x1EE - Number of active participants (1-4)
-    u8 filler_1EF[1];                          // 0x1EF
+    u8 field_1EF;                              // 0x1EF
     u32 field_1F0;                             // 0x1F0
     u32 field_1F4;                             // 0x1F4
     PokeathlonCourseArgs *args;                // 0x1F8
@@ -146,5 +146,22 @@ void *ov96_021E8770(int a0, int a1, PokeathlonCourseData *data, int a3, enum Hea
 int ov96_021E8A24(void);
 int ov96_021E8A2C(void);
 void *ov96_021E92E0(enum HeapID heapId);
+
+// Overlay 96 phase 1 — pokeathlon_course_util.c (15 contiguous functions)
+void ov96_021E5E04(PokeathlonCourseData *data, const u8 *participantOrder);
+u32 ov96_021E5E44(PokeathlonCourseData *data);
+u32 ov96_021E5E58(PokeathlonCourseData *data, u32 index);
+u32 ov96_021E5E7C(PokeathlonCourseData *data);
+u32 ov96_021E5EE0(PokeathlonCourseData *data);
+u32 ov96_021E5EE8(PokeathlonCourseData *data);
+u8 ov96_021E5EF4(PokeathlonCourseData *data);
+void ov96_021E5F00(PokeathlonCourseData *data);
+void ov96_021E5F10(PokeathlonCourseData *data);
+void *ov96_021E5F1C(PokeathlonCourseData *data);
+BOOL ov96_021E5F24(PokeathlonCourseData *data);
+PlayerProfile *ov96_021E5F34(PokeathlonCourseData *data, int index);
+void *ov96_021E5F44(PokeathlonCourseData *data, int index);
+u8 *ov96_021E5F54(PokeathlonCourseData *data);
+void ov96_021E5F5C(PokeathlonCourseData *data);
 
 #endif // POKEHEARTGOLD_POKEATHLON_H

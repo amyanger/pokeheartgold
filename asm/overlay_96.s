@@ -23,251 +23,21 @@
 	.extern ov96_021E5DE0
 	.extern ov96_021E5DEC
 	.extern ov96_021E5DFC
-
-	thumb_func_start ov96_021E5E04
-ov96_021E5E04: ; 0x021E5E04
-	push {r4, r5, r6, lr}
-	ldr r2, _021E5E40 ; =0x0000072A
-	add r4, r0, #0
-	ldrb r2, [r4, r2]
-	mov r0, #0
-	cmp r2, #0
-	ble _021E5E28
-	mov r3, #0xf6
-	ldr r5, _021E5E40 ; =0x0000072A
-	add r2, r4, #0
-	lsl r3, r3, #2
-_021E5E1A:
-	ldrb r6, [r1, r0]
-	add r0, r0, #1
-	str r6, [r2, r3]
-	ldrb r6, [r4, r5]
-	add r2, r2, #4
-	cmp r0, r6
-	blt _021E5E1A
-_021E5E28:
-	add r0, r4, #0
-	bl ov96_021E5E7C
-	mov r1, #0xfa
-	lsl r1, r1, #2
-	str r0, [r4, r1]
-	mov r0, #0x9f
-	ldr r1, [r4, r1]
-	lsl r0, r0, #2
-	str r1, [r4, r0]
-	pop {r4, r5, r6, pc}
-	nop
-_021E5E40: .word 0x0000072A
-	thumb_func_end ov96_021E5E04
-
-	thumb_func_start ov96_021E5E44
-ov96_021E5E44: ; 0x021E5E44
-	mov r1, #0x1f
-	lsl r1, r1, #4
-	ldr r1, [r0, r1]
-	lsl r1, r1, #2
-	add r1, r0, r1
-	mov r0, #0xf6
-	lsl r0, r0, #2
-	ldr r0, [r1, r0]
-	bx lr
-	.balign 4, 0
-	thumb_func_end ov96_021E5E44
-
-	thumb_func_start ov96_021E5E58
-ov96_021E5E58: ; 0x021E5E58
-	push {r3, lr}
-	ldr r2, _021E5E78 ; =0x0000072A
-	ldrb r2, [r0, r2]
-	cmp r1, r2
-	blo _021E5E6A
-	bl GF_AssertFail
-	mov r0, #0
-	pop {r3, pc}
-_021E5E6A:
-	lsl r1, r1, #2
-	add r1, r0, r1
-	mov r0, #0xf6
-	lsl r0, r0, #2
-	ldr r0, [r1, r0]
-	pop {r3, pc}
-	nop
-_021E5E78: .word 0x0000072A
-	thumb_func_end ov96_021E5E58
-
-	thumb_func_start ov96_021E5E7C
-ov96_021E5E7C: ; 0x021E5E7C
-	push {r3, r4, r5, r6, r7, lr}
-	add r4, r0, #0
-	bl ov96_021E5EE8
-	cmp r0, #1
-	bne _021E5E8C
-	mov r1, #1
-	b _021E5E8E
-_021E5E8C:
-	mov r1, #0
-_021E5E8E:
-	mov r0, #0xf6
-	lsl r0, r0, #2
-	add r3, r4, r0
-	cmp r1, #0
-	beq _021E5E9C
-	mov r0, #4
-	b _021E5E9E
-_021E5E9C:
-	mov r0, #3
-_021E5E9E:
-	lsl r0, r0, #0x18
-	lsr r2, r0, #0x18
-	mov r0, #0
-_021E5EA4:
-	mov r4, #1
-	mov r1, #0
-	cmp r2, #0
-	bls _021E5ECA
-	ldr r5, _021E5EDC ; =ov96_0221A934
-	lsl r6, r0, #2
-	add r5, r5, r6
-_021E5EB2:
-	lsl r6, r1, #2
-	ldr r7, [r3, r6]
-	ldrb r6, [r5, r1]
-	cmp r7, r6
-	beq _021E5EC0
-	mov r4, #0
-	b _021E5ECA
-_021E5EC0:
-	add r1, r1, #1
-	lsl r1, r1, #0x18
-	lsr r1, r1, #0x18
-	cmp r1, r2
-	blo _021E5EB2
-_021E5ECA:
-	cmp r4, #0
-	bne _021E5EDA
-	add r0, r0, #1
-	lsl r0, r0, #0x18
-	lsr r0, r0, #0x18
-	cmp r0, #0xa
-	blo _021E5EA4
-	mov r0, #0xa
-_021E5EDA:
-	pop {r3, r4, r5, r6, r7, pc}
-	.balign 4, 0
-_021E5EDC: .word ov96_0221A934
-	thumb_func_end ov96_021E5E7C
-
-	thumb_func_start ov96_021E5EE0
-ov96_021E5EE0: ; 0x021E5EE0
-	mov r1, #0x1f
-	lsl r1, r1, #4
-	ldr r0, [r0, r1]
-	bx lr
-	thumb_func_end ov96_021E5EE0
-
-	thumb_func_start ov96_021E5EE8
-ov96_021E5EE8: ; 0x021E5EE8
-	mov r1, #0x7e
-	lsl r1, r1, #2
-	ldr r0, [r0, r1]
-	ldr r0, [r0, #4]
-	bx lr
-	.balign 4, 0
-	thumb_func_end ov96_021E5EE8
-
-	thumb_func_start ov96_021E5EF4
-ov96_021E5EF4: ; 0x021E5EF4
-	ldr r1, _021E5EFC ; =0x000001EF
-	ldrb r0, [r0, r1]
-	bx lr
-	nop
-_021E5EFC: .word 0x000001EF
-	thumb_func_end ov96_021E5EF4
-
-	thumb_func_start ov96_021E5F00
-ov96_021E5F00: ; 0x021E5F00
-	ldr r1, _021E5F0C ; =0x000001EF
-	ldrb r2, [r0, r1]
-	add r2, r2, #1
-	strb r2, [r0, r1]
-	bx lr
-	nop
-_021E5F0C: .word 0x000001EF
-	thumb_func_end ov96_021E5F00
-
-	thumb_func_start ov96_021E5F10
-ov96_021E5F10: ; 0x021E5F10
-	ldr r1, _021E5F18 ; =0x000001EF
-	mov r2, #0
-	strb r2, [r0, r1]
-	bx lr
-	.balign 4, 0
-_021E5F18: .word 0x000001EF
-	thumb_func_end ov96_021E5F10
-
-	thumb_func_start ov96_021E5F1C
-ov96_021E5F1C: ; 0x021E5F1C
-	mov r1, #0xa2
-	lsl r1, r1, #2
-	ldr r0, [r0, r1]
-	bx lr
-	thumb_func_end ov96_021E5F1C
-
-	thumb_func_start ov96_021E5F24
-ov96_021E5F24: ; 0x021E5F24
-	mov r1, #0xa2
-	lsl r1, r1, #2
-	ldr r3, _021E5F30 ; =ov96_021E8828
-	ldr r0, [r0, r1]
-	bx r3
-	nop
-_021E5F30: .word ov96_021E8828
-	thumb_func_end ov96_021E5F24
-
-	thumb_func_start ov96_021E5F34
-ov96_021E5F34: ; 0x021E5F34
-	ldr r2, _021E5F3C ; =0x000005DC
-	ldr r3, _021E5F40 ; =PokeathlonCourse_GetPlayerProfile
-	ldr r0, [r0, r2]
-	bx r3
-	.balign 4, 0
-_021E5F3C: .word 0x000005DC
-_021E5F40: .word PokeathlonCourse_GetPlayerProfile
-	thumb_func_end ov96_021E5F34
-
-	thumb_func_start ov96_021E5F44
-ov96_021E5F44: ; 0x021E5F44
-	ldr r2, _021E5F50 ; =0x00000974
-	add r2, r0, r2
-	mov r0, #0x74
-	mul r0, r1
-	add r0, r2, r0
-	bx lr
-	.balign 4, 0
-_021E5F50: .word 0x00000974
-	thumb_func_end ov96_021E5F44
-
-	thumb_func_start ov96_021E5F54
-ov96_021E5F54: ; 0x021E5F54
-	mov r1, #0xa3
-	lsl r1, r1, #2
-	add r0, r0, r1
-	bx lr
-	thumb_func_end ov96_021E5F54
-
-	thumb_func_start ov96_021E5F5C
-ov96_021E5F5C: ; 0x021E5F5C
-	mov r1, #0xa3
-	lsl r1, r1, #2
-	mov r2, #0x4a
-	add r0, r0, r1
-	ldr r3, _021E5F6C ; =MI_CpuFill8
-	mov r1, #0
-	lsl r2, r2, #2
-	bx r3
-	.balign 4, 0
-_021E5F6C: .word MI_CpuFill8
-	thumb_func_end ov96_021E5F5C
+	.extern ov96_021E5E04
+	.extern ov96_021E5E44
+	.extern ov96_021E5E58
+	.extern ov96_021E5E7C
+	.extern ov96_021E5EE0
+	.extern ov96_021E5EE8
+	.extern ov96_021E5EF4
+	.extern ov96_021E5F00
+	.extern ov96_021E5F10
+	.extern ov96_021E5F1C
+	.extern ov96_021E5F24
+	.extern ov96_021E5F34
+	.extern ov96_021E5F44
+	.extern ov96_021E5F54
+	.extern ov96_021E5F5C
 
 	thumb_func_start ov96_021E5F70
 ov96_021E5F70: ; 0x021E5F70
@@ -107818,6 +107588,7 @@ ov96_0221A920:
 	.word ov96_021F553C
 	.word 1
 
+	.public ov96_0221A934
 ov96_0221A934: ; 0x0221A934
 	.byte 0x00, 0x01, 0x06, 0x0A, 0x03, 0x02, 0x09, 0x0A, 0x08, 0x09, 0x01, 0x0A
 	.byte 0x07, 0x06, 0x03, 0x0A, 0x05, 0x04, 0x00, 0x0A, 0x00, 0x05, 0x04, 0x06, 0x05, 0x04, 0x01, 0x08
