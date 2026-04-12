@@ -205,7 +205,7 @@ Static main
     Object src/terrain_attributes.o
     Object asm/unk_02054648.o
     Object asm/unk_02054E00.o
-    Object asm/unk_020551B8.o
+    Object src/unk_020551B8.o
     Object src/unk_02055244.o
     Object src/unk_02055418.o
     Object src/catching_show.o
@@ -273,7 +273,7 @@ Static main
     Object src/item.o
     Object src/bag.o
     Object asm/unk_02078834.o
-    Object asm/unk_02078DD8.o
+    Object src/unk_02078DD8.o
     Object src/party_menu.o
     Object src/party_context_menu.o
     Object src/party_menu_sprites.o
@@ -336,7 +336,7 @@ Static main
     Object src/unk_02097720.o
     Object asm/unk_020977CC.o
     Object asm/unk_020979A8.o
-    Object asm/unk_02097B78.o
+    Object src/unk_02097B78.o
     Object asm/unk_02097BE0.o
     Object src/unk_02097D3C.o
     Object src/pokemon_mood.o
