@@ -281,7 +281,7 @@ typedef struct PartyMenuArgs {
     Bag *bag;
     Mailbox *mailbox;
     Options *options;
-    UnkStruct_0202E474 *unk_10;
+    UnkStruct_0202E41C *unk_10;
     LinkBattleRuleset *linkBattleRuleset;
     FieldMoveCheckData *fieldMoveCheckData;
     FieldSystem *fieldSystem;

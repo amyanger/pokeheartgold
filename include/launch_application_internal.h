@@ -4,6 +4,7 @@
 #include "launch_application.h"
 #include "naming_screen.h"
 #include "unk_0202C034.h"
+#include "unk_0202DB34.h"
 
 typedef enum PartyMenuMoveSelectState {
     PMMS_OPEN_PARTY_MENU,
@@ -125,7 +126,7 @@ typedef struct NamingScreenData {
 } NamingScreenData;
 
 typedef struct UnkStruct_0203F844 {
-    int unk0;
+    UnkStruct_0202DB34 *unk0;
     SysInfo *sysInfo;
     Party *party;
     PCStorage *pcStorage;

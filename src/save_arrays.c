@@ -31,6 +31,7 @@
 #include "save_trainer_house.h"
 #include "save_vars_flags.h"
 #include "save_wifi_history.h"
+#include "unk_0202DB34.h"
 #include "unk_0202E41C.h"
 #include "unk_02030A98.h"
 
@@ -45,8 +46,6 @@
 
 DECL_CHUNK(Save_FashionData)
 DECL_CHUNK(Save_Frontier)
-DECL_CHUNK_EX(sub_0202DB40, sub_0202DB44)
-DECL_CHUNK_EX(sub_0202E41C, sub_0202E424)
 DECL_CHUNK_EX(sub_0202C034, sub_0202C03C)
 DECL_CHUNK_EX(sub_02031AF0, sub_02031AF4)
 DECL_CHUNK_EX(sub_0203170C, sub_02031710)
@@ -310,7 +309,7 @@ const struct SaveChunkHeader gSaveChunkHeaders[] = {
 };
 const int gNumSaveChunkHeaders = NELEMS(gSaveChunkHeaders);
 
-UnkStruct_0202E474 *sub_020270C4(SaveData *saveData) { // Save_SafariZone_Get? conflicts with other one
+UnkStruct_0202E41C *sub_020270C4(SaveData *saveData) { // Save_SafariZone_Get? conflicts with other one
     SaveSubstruct_AssertCRC(SAVE_UNK_23);
     return SaveArray_Get(saveData, SAVE_UNK_23);
 }
