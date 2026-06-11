@@ -52,7 +52,7 @@ struct GearPhoneRingManager {
     u8 isScriptedCall;
     u8 callScriptID;
     u8 unk_arr5[2];
-    u8 unk_var7;
+    u8 callTriggerID;
     s32 unk_var8;
     s32 unk_varC;
     u16 maxActiveDuration;
@@ -148,7 +148,7 @@ struct FieldSystem {
     BagCursor *bagCursor;
     u8 filler_98[0x4];
     void *unk9C;
-    UnkStruct_Fsys_A0 *unkA0;
+    FrontierFieldSystem *frontierFsys;
     Save_LinkBattleRuleset *linkBattleRuleset;
     UnkStruct_02092BB8 *unkA8;
     u32 unkAC;

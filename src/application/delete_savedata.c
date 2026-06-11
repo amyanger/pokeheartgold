@@ -11,6 +11,7 @@
 #include "main.h"
 #include "msgdata.h"
 #include "render_window.h"
+#include "sound.h"
 #include "sound_02004A44.h"
 #include "system.h"
 #include "text.h"
@@ -147,7 +148,7 @@ BOOL DeleteSavedataApp_Main(OverlayManager *manager, int *state) {
     case STATE_SETUP:
         StopBGM(SEQ_GS_POKEMON_THEME, 0);
         sub_02005AF8(0);
-        sub_02004AD8(0);
+        Sound_SetScene(SOUND_SCENE_NONE);
 
         sub_0200FBF4(PM_LCD_TOP, RGB_BLACK);
         sub_0200FBF4(PM_LCD_BOTTOM, RGB_BLACK);

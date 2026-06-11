@@ -1,5 +1,3 @@
-#include "nitro/mi/memory.h"
-
 #include "global.h"
 
 #include "pokeathlon/pokeathlon.h"
@@ -14,9 +12,6 @@
 #include "system.h"
 #include "unk_02005D10.h"
 
-extern BOOL ov96_021E8828(void *system);
-extern const u8 ov96_0221A934[];
-extern void ov96_021E75BC(void *data);
 extern u16 ov96_021E679C(u16 a, u16 b);
 extern void *ov96_021EA214(int a1, int a2, int a3, int a4, int heapId);
 extern void *ov96_021EA4D4(int a1, int a2, int a3, int heapId);
@@ -26,264 +21,6 @@ extern void *ov96_021EA7A4(u32 a1, u32 a2, u32 a3, int heapId);
 extern int ov96_021EB5E8(int a);
 extern BOOL ov96_021E661C(PokeathlonCourseData *data);
 extern void ov96_021E81D8(SysTask *task, void *data);
-
-// ov96_021E5E04 — Initialize participant order array from external data, run pattern match
-void ov96_021E5E04(PokeathlonCourseData *data, const u8 *participantOrder) {
-    int i;
-
-    for (i = 0; i < data->maxParticipants; i++) {
-        data->field_3D8[i] = participantOrder[i];
-    }
-
-    data->field_3E8 = (void *)ov96_021E5E7C(data);
-    data->field_27C = data->field_3E8;
-}
-
-// ov96_021E5E44 — Get participant ID at current index
-u32 ov96_021E5E44(PokeathlonCourseData *data) {
-    return data->field_3D8[data->field_1F0];
-}
-
-// ov96_021E5E58 — Get participant ID at index with bounds check
-u32 ov96_021E5E58(PokeathlonCourseData *data, u32 index) {
-    if (index >= data->maxParticipants) {
-        GF_ASSERT(FALSE);
-        return 0;
-    }
-    return data->field_3D8[index];
-}
-
-// ov96_021E5E7C — Pattern match participant IDs against table.
-// NONMATCHING: C version can't reproduce the exact loop codegen; keep the
-// original asm bytes via an inline-asm fallback for matching builds.
-#ifdef NONMATCHING
-u32 ov96_021E5E7C(PokeathlonCourseData *data) {
-    BOOL isSpecial;
-    u32 *ids;
-    u8 count;
-    u8 i, j;
-    BOOL match;
-
-    if (ov96_021E5EE8(data) == 1) {
-        isSpecial = TRUE;
-    } else {
-        isSpecial = FALSE;
-    }
-
-    ids = data->field_3D8;
-
-    if (isSpecial) {
-        count = 4;
-    } else {
-        count = 3;
-    }
-
-    for (i = 0; i < 10; i++) {
-        match = TRUE;
-        for (j = 0; j < count; j++) {
-            if (ids[j] != ov96_0221A934[i * 4 + j]) {
-                match = FALSE;
-                break;
-            }
-        }
-        if (match) {
-            return i;
-        }
-    }
-
-    return 10;
-}
-#else
-// clang-format off
-asm u32 ov96_021E5E7C(PokeathlonCourseData *data) {
-    push {r3, r4, r5, r6, r7, lr}
-    add r4, r0, #0
-    bl ov96_021E5EE8
-    cmp r0, #1
-    bne _021E5E8C
-    mov r1, #1
-    b _021E5E8E
-_021E5E8C:
-    mov r1, #0
-_021E5E8E:
-    mov r0, #0xf6
-    lsl r0, r0, #2
-    add r3, r4, r0
-    cmp r1, #0
-    beq _021E5E9C
-    mov r0, #4
-    b _021E5E9E
-_021E5E9C:
-    mov r0, #3
-_021E5E9E:
-    lsl r0, r0, #0x18
-    lsr r2, r0, #0x18
-    mov r0, #0
-_021E5EA4:
-    mov r4, #1
-    mov r1, #0
-    cmp r2, #0
-    bls _021E5ECA
-    ldr r5, =ov96_0221A934
-    lsl r6, r0, #2
-    add r5, r5, r6
-_021E5EB2:
-    lsl r6, r1, #2
-    ldr r7, [r3, r6]
-    ldrb r6, [r5, r1]
-    cmp r7, r6
-    beq _021E5EC0
-    mov r4, #0
-    b _021E5ECA
-_021E5EC0:
-    add r1, r1, #1
-    lsl r1, r1, #0x18
-    lsr r1, r1, #0x18
-    cmp r1, r2
-    blo _021E5EB2
-_021E5ECA:
-    cmp r4, #0
-    bne _021E5EDA
-    add r0, r0, #1
-    lsl r0, r0, #0x18
-    lsr r0, r0, #0x18
-    cmp r0, #0xa
-    blo _021E5EA4
-    mov r0, #0xa
-_021E5EDA:
-    pop {r3, r4, r5, r6, r7, pc}
-}
-// clang-format on
-#endif
-
-// ov96_021E5EE0 — Get field_1F0
-u32 ov96_021E5EE0(PokeathlonCourseData *data) {
-    return data->field_1F0;
-}
-
-// ov96_021E5EE8 — Get args mode (full u32)
-u32 ov96_021E5EE8(PokeathlonCourseData *data) {
-    return data->args->mode;
-}
-
-// ov96_021E5EF4 — Get field_1EF
-u8 ov96_021E5EF4(PokeathlonCourseData *data) {
-    return data->field_1EF;
-}
-
-// ov96_021E5F00 — Increment field_1EF
-void ov96_021E5F00(PokeathlonCourseData *data) {
-    data->field_1EF++;
-}
-
-// ov96_021E5F10 — Zero field_1EF
-void ov96_021E5F10(PokeathlonCourseData *data) {
-    data->field_1EF = 0;
-}
-
-// ov96_021E5F1C — Get system pointer
-void *ov96_021E5F1C(PokeathlonCourseData *data) {
-    return data->system;
-}
-
-// ov96_021E5F24 — Tail call to ov96_021E8828 with system pointer
-BOOL ov96_021E5F24(PokeathlonCourseData *data) {
-    return ov96_021E8828(data->system);
-}
-
-// ov96_021E5F34 — Get player profile (tail call)
-PlayerProfile *ov96_021E5F34(PokeathlonCourseData *data, int index) {
-    return PokeathlonCourse_GetPlayerProfile(data->playerProfiles, index);
-}
-
-// ov96_021E5F44 — Calculate participant extended data address
-void *ov96_021E5F44(PokeathlonCourseData *data, int index) {
-    return (u8 *)data + 0x974 + index * 0x74;
-}
-
-// ov96_021E5F54 — Get dataCopySource pointer
-u8 *ov96_021E5F54(PokeathlonCourseData *data) {
-    return data->dataCopySource;
-}
-
-// ov96_021E5F5C — Clear dataCopySource area
-void ov96_021E5F5C(PokeathlonCourseData *data) {
-    MI_CpuFill8(data->dataCopySource, 0, 0x128);
-}
-
-// ov96_021E5F70 — Initialize state transition fields
-void ov96_021E5F70(PokeathlonCourseData *data, u32 a1, u32 a2, u32 a3) {
-    data->field_3A4 = a1;
-    data->field_3A8 = a2;
-    data->field_3AC = a3;
-    data->field_3B0 = 1;
-}
-
-// ov96_021E5F8C — Clear state transition fields
-void ov96_021E5F8C(PokeathlonCourseData *data) {
-    data->field_3A4 = 0;
-    data->field_3A8 = 0;
-    data->field_3AC = 0;
-    data->field_3B0 = 0;
-}
-
-// ov96_021E5FA4 — Get field_3A8
-u32 ov96_021E5FA4(PokeathlonCourseData *data) {
-    return data->field_3A8;
-}
-
-// ov96_021E5FAC — Return constant 4
-u32 ov96_021E5FAC(void) {
-    return 4;
-}
-
-// ov96_021E5FB0 — Write u16 into area at 0x5E0 with stride 4
-void ov96_021E5FB0(PokeathlonCourseData *data, int index, u16 value) {
-    *(u16 *)((u8 *)data + index * 4 + 0x5E0) = value;
-}
-
-// ov96_021E5FBC — Read u16 from area at 0x5F0 with stride 4
-u16 ov96_021E5FBC(PokeathlonCourseData *data, int index) {
-    return *(u16 *)((u8 *)data + index * 4 + 0x5F0);
-}
-
-// ov96_021E5FC8 — Set state transition with exit-flag assertion
-void ov96_021E5FC8(PokeathlonCourseData *data, u8 value) {
-    if (data->courseState.exitFlag == 1) {
-        GF_ASSERT(FALSE);
-    }
-    data->courseState.exitFlag = 1;
-    ((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 = value;
-}
-
-// ov96_021E5FEC — Conditional state transition
-void ov96_021E5FEC(PokeathlonCourseData *data, u8 value, u8 compare) {
-    if (((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 == compare) {
-        return;
-    }
-    if (data->courseState.exitFlag == 1) {
-        GF_ASSERT(FALSE);
-    }
-    data->courseState.exitFlag = 1;
-    ((PokeathlonStateInfo *)data->courseState.argsPtr)->field_07 = value;
-}
-
-// ov96_021E601C — Set courseState.transitionType if args->mode == 1
-void ov96_021E601C(PokeathlonCourseData *data, u32 value) {
-    if (data->args->mode == 1) {
-        data->courseState.transitionType = value;
-    }
-}
-
-// ov96_021E6030 — Register V-blank callback
-void ov96_021E6030(PokeathlonCourseData *data) {
-    Main_SetVBlankIntrCB(ov96_021E75BC, data);
-}
-
-// ov96_021E6040 — Get graphicsSystem pointer
-void *ov96_021E6040(PokeathlonCourseData *data) {
-    return data->graphicsSystem;
-}
 
 // ov96_021E604C — Load course data from NARC archive
 void ov96_021E604C(PokeathlonCourseData *data) {
@@ -377,7 +114,7 @@ u8 ov96_021E6138(void *p) {
 // ov96_021E6168 — Populate a 16-byte slot info struct from participant data,
 // then probe NARC 0x8d for a gender/form variant flag.
 void ov96_021E6168(PokeathlonCourseData *data, int partIndex, int slot, void *dest) {
-    u8 buf[0x1C];
+    u8 buf[4];
     u8 *src;
     u8 *d = (u8 *)dest;
 
@@ -412,8 +149,8 @@ void ov96_021E6168(PokeathlonCourseData *data, int partIndex, int slot, void *de
 // ov96_021E61D8 — Allocate three sprites and position them via Sprite_SetMatrix.
 // Returns &data->field_708 (pointer to the first allocated sprite slot).
 void *ov96_021E61D8(PokeathlonCourseData *data, int a1, int a2, int a3) {
-    VecFx32 m2;
     VecFx32 m1;
+    VecFx32 m2;
 
     data->field_708 = ov96_021EA214(a2, a3, 0, 1, data->heapId);
     data->field_710 = ov96_021EA4D4(a2, a3, 0, data->heapId);
@@ -446,13 +183,17 @@ void *ov96_021E6290(PokeathlonCourseData *data, int a1, int a2, int a3) {
 // ov96_021E62AC — Create `count` sprites into field_71C[0..count), position
 // each via Sprite_SetMatrix using (a2, positions[i]), and clear the
 // remaining slots up to index 3. Resets field_729 at the end.
+// NONMATCHING: mwcc register-caches one of the stack args (count/positions),
+// while the original reloads all three from their home slots on every use.
+// Keep the original bytes via an inline-asm fallback for matching builds.
+#ifdef NONMATCHING
 void ov96_021E62AC(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u32 count, const u16 *positions) {
     VecFx32 m;
     u8 i;
 
-    data->field_728 = (u8)count;
+    data->field_728 = count;
 
-    for (i = 0; i < (u8)count; i++) {
+    for (i = 0; i < count; i++) {
         data->field_71C[i] = ov96_021EA6E4(a3, a4, a5, 0, data->heapId);
         m.z = 0;
         m.x = ((u32)positions[i * 2]) << 12;
@@ -466,6 +207,88 @@ void ov96_021E62AC(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u
 
     data->field_729 = 0;
 }
+#else
+// clang-format off
+asm void ov96_021E62AC(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u32 count, const u16 *positions) {
+    push {r4, r5, r6, r7, lr}
+    sub sp, #0x1c
+    add r7, r0, #0
+    ldr r0, [sp, #0x30]
+    str r1, [sp, #4]
+    str r0, [sp, #0x30]
+    ldr r0, [sp, #0x34]
+    ldr r1, =0x00000728
+    str r0, [sp, #0x34]
+    ldr r0, [sp, #0x38]
+    str r2, [sp, #8]
+    str r0, [sp, #0x38]
+    ldr r0, [sp, #0x34]
+    str r3, [sp, #0xc]
+    strb r0, [r7, r1]
+    ldr r0, [sp, #0x34]
+    mov r4, #0
+    cmp r0, #0
+    bls _021E631E
+_021E62D2:
+    mov r0, #0xa1
+    lsl r0, r0, #2
+    ldr r0, [r7, r0]
+    lsl r6, r4, #2
+    str r0, [sp]
+    ldr r0, [sp, #8]
+    ldr r1, [sp, #0xc]
+    ldr r2, [sp, #0x30]
+    mov r3, #0
+    add r5, r7, r6
+    bl ov96_021EA6E4
+    ldr r1, =0x0000071C
+    str r0, [r5, r1]
+    mov r0, #0
+    str r0, [sp, #0x18]
+    ldr r1, [sp, #0x38]
+    ldr r0, [sp, #0x38]
+    ldrh r1, [r1, r6]
+    add r0, r0, r6
+    lsl r1, r1, #0xc
+    str r1, [sp, #0x10]
+    ldrh r1, [r0, #2]
+    ldr r0, [sp, #4]
+    add r0, r0, r1
+    lsl r0, r0, #0xc
+    str r0, [sp, #0x14]
+    ldr r0, =0x0000071C
+    add r1, sp, #0x10
+    ldr r0, [r5, r0]
+    bl Sprite_SetMatrix
+    add r0, r4, #1
+    lsl r0, r0, #0x18
+    lsr r4, r0, #0x18
+    ldr r0, [sp, #0x34]
+    cmp r4, r0
+    blo _021E62D2
+_021E631E:
+    cmp r4, #3
+    bhs _021E6336
+    ldr r0, =0x0000071C
+    mov r2, #0
+_021E6326:
+    lsl r1, r4, #2
+    add r1, r7, r1
+    str r2, [r1, r0]
+    add r1, r4, #1
+    lsl r1, r1, #0x18
+    lsr r4, r1, #0x18
+    cmp r4, #3
+    blo _021E6326
+_021E6336:
+    ldr r0, =0x00000729
+    mov r1, #0
+    strb r1, [r7, r0]
+    add sp, #0x1c
+    pop {r4, r5, r6, r7, pc}
+}
+// clang-format on
+#endif
 
 // ov96_021E634C — Wrapper that preprocesses a4 via ov96_021EB5E8 and forwards
 // to ov96_021E62AC with a5/count/positions passed through.
@@ -480,18 +303,20 @@ void ov96_021E634C(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u
 // TRUE once the animation completes (field_70C > 0x3f).
 BOOL ov96_021E637C(PokeathlonCourseData *data) {
     BOOL done = FALSE;
-    u8 state = data->field_729;
 
-    if (state == 0) {
+    switch (data->field_729) {
+    case 0:
         PlaySE(0x89a);
         ov96_021E65D8(data);
         data->field_729++;
-    } else if (state == 1) {
+        break;
+    case 1:
         if (ov96_021E661C(data)) {
             data->field_729++;
             sub_020053A8(7, 0);
         }
-    } else if (state == 2) {
+        break;
+    case 2: {
         u8 frame = data->field_70C;
         if (frame == 0) {
             PlaySE(0x89d);
@@ -511,6 +336,8 @@ BOOL ov96_021E637C(PokeathlonCourseData *data) {
             data->field_70C = 0;
             done = TRUE;
         }
+        break;
+    }
     }
 
     return done;
@@ -526,16 +353,16 @@ void ov96_021E6454(PokeathlonCourseData *data, int param) {
         Sprite_SetDrawFlag((Sprite *)data->field_714, FALSE);
         return;
     }
-    if (tier > 3) {
-        Sprite_SetDrawFlag((Sprite *)data->field_714, FALSE);
+    if (tier <= 3) {
+        if (data->field_72B != tier) {
+            PlaySE(0x897);
+            data->field_72B = (u8)tier;
+        }
+        Sprite_SetDrawFlag((Sprite *)data->field_714, TRUE);
+        Sprite_SetAnimCtrlSeq((Sprite *)data->field_714, tier + 1);
         return;
     }
-    if (data->field_72B != tier) {
-        PlaySE(0x897);
-        data->field_72B = (u8)tier;
-    }
-    Sprite_SetDrawFlag((Sprite *)data->field_714, TRUE);
-    Sprite_SetAnimCtrlSeq((Sprite *)data->field_714, tier + 1);
+    Sprite_SetDrawFlag((Sprite *)data->field_714, FALSE);
 }
 
 // ov96_021E64B8 — Initialize the sprite task table: zero count, assert each
@@ -564,7 +391,7 @@ void *ov96_021E64F8(PokeathlonCourseData *data, u32 a1, u32 a2, u32 a3, u32 a4) 
         return NULL;
     }
 
-    slot = &data->spriteTasks[data->field_D30];
+    slot = &data->spriteTasks[(u8)data->field_D30];
     slot->active = 1;
     slot->arg = a1;
     slot->sprite = ov96_021EA7A4(a2, a3, a4, data->heapId);
@@ -589,7 +416,7 @@ void ov96_021E6550(PokeathlonCourseData *data) {
 
 // ov96_021E658C — Tail-call Sprite_TryChangeAnimSeq on a task slot's sprite.
 void ov96_021E658C(PokeathlonCourseData *data, int index, int seq) {
-    Sprite_TryChangeAnimSeq((Sprite *)data->spriteTasks[index].task, seq);
+    Sprite_TryChangeAnimSeq((Sprite *)data->spriteTasks[index].sprite, seq);
 }
 
 // ov96_021E65A4 — Halt all sprite task animations; assert each slot is live.
@@ -600,7 +427,7 @@ void ov96_021E65A4(PokeathlonCourseData *data) {
         if (data->spriteTasks[i].active == 0) {
             GF_ASSERT(FALSE);
         }
-        Sprite_SetAnimActiveFlag((Sprite *)data->spriteTasks[i].task, FALSE);
+        Sprite_SetAnimActiveFlag((Sprite *)data->spriteTasks[i].sprite, FALSE);
     }
 }
 

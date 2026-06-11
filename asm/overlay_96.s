@@ -12,43 +12,43 @@
 	.extern PokeathlonCourse_GetParticipantData
 	.extern PokeathlonCourse_GetParticipantUnk04
 	.extern PokeathlonCourse_GetSaveData
-	.extern ov96_021E5D6C
-	.extern ov96_021E5D78
-	.extern ov96_021E5D88
+	.extern PokeathlonCourse_GetFieldData
+	.extern PokeathlonCourse_GetFieldData_AtIndex
+	.extern PokeathlonCourse_GetFieldBA4
 	.extern PokeathlonCourse_AllocPtr4FromHeap
 	.extern PokeathlonCourse_FreePtr4HeapAlloc
 	.extern PokeathlonCourse_GetHeapAllocPtr4
 	.extern PokeathlonCourse_GetHeapID
-	.extern ov96_021E5DD4
-	.extern ov96_021E5DE0
-	.extern ov96_021E5DEC
-	.extern ov96_021E5DFC
+	.extern PokeathlonCourse_GetField1ED
+	.extern PokeathlonCourse_SetField1ED
+	.extern PokeathlonCourse_IncrementField1ED
+	.extern PokeathlonCourse_SetField1F4
 	.extern ov96_021E5E04
-	.extern ov96_021E5E44
-	.extern ov96_021E5E58
+	.extern PokeathlonCourse_GetField3D8_ForCurrentParticipant
+	.extern PokeathlonCourse_GetField3D8_AtIndex
 	.extern ov96_021E5E7C
-	.extern ov96_021E5EE0
-	.extern ov96_021E5EE8
-	.extern ov96_021E5EF4
-	.extern ov96_021E5F00
-	.extern ov96_021E5F10
-	.extern ov96_021E5F1C
+	.extern PokeathlonCourse_GetCurrentParticipantIndex
+	.extern PokeathlonCourse_GetMode
+	.extern PokeathlonCourse_GetField1EF
+	.extern PokeathlonCourse_IncrementField1EF
+	.extern PokeathlonCourse_ResetField1EF
+	.extern PokeathlonCourse_GetSystem
 	.extern ov96_021E5F24
-	.extern ov96_021E5F34
-	.extern ov96_021E5F44
-	.extern ov96_021E5F54
-	.extern ov96_021E5F5C
-	.extern ov96_021E5F70
-	.extern ov96_021E5F8C
-	.extern ov96_021E5FA4
-	.extern ov96_021E5FAC
-	.extern ov96_021E5FB0
-	.extern ov96_021E5FBC
-	.extern ov96_021E5FC8
-	.extern ov96_021E5FEC
-	.extern ov96_021E601C
-	.extern ov96_021E6030
-	.extern ov96_021E6040
+	.extern PokeathlonCourse_GetPlayerProfileFromData
+	.extern PokeathlonCourse_GetField974_AtIndex
+	.extern PokeathlonCourse_GetDataCopyArea
+	.extern PokeathlonCourse_ResetDataCopyArea
+	.extern PokeathlonCourse_SetField3A4
+	.extern PokeathlonCourse_ResetField3A4
+	.extern PokeathlonCourse_GetField3A4
+	.extern PokeathlonCourse_GetUnkConstant4
+	.extern PokeathlonCourse_SetField5E0_AtIndex
+	.extern PokeathlonCourse_GetField5F0_AtIndex
+	.extern PokeathlonCourse_SetStateField07
+	.extern PokeathlonCourse_SetStateField07_IfDifferent
+	.extern PokeathlonCourse_SetStateTransitionType
+	.extern PokeathlonCourse_SetVBlankIntrCB
+	.extern PokeathlonCourse_GetGraphicsSystem
 	.extern ov96_021E604C
 	.extern ov96_021E60C0
 	.extern ov96_021E60D8
@@ -326,7 +326,7 @@ _021E67FC:
 	add r0, r4, #0
 	mov r1, #0x26
 	mov r2, #1
-	bl ov96_021E5FEC
+	bl PokeathlonCourse_SetStateField07_IfDifferent
 _021E680A:
 	mov r0, #0
 	pop {r3, r4, r5, pc}
@@ -362,21 +362,21 @@ ov96_021E6814: ; 0x021E6814
 	strb r1, [r0, #0xe]
 	add r0, r4, #0
 	mov r1, #0x25
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E686C
 _021E6852:
 	mov r1, #0
 	strb r1, [r0, #0xe]
 	add r0, r4, #0
 	mov r1, #3
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E686C
 _021E6860:
 	mov r1, #0
 	strb r1, [r0, #0xe]
 	add r0, r4, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E686C:
 	mov r0, #0
 	pop {r4, pc}
@@ -466,7 +466,7 @@ _021E68F0:
 	beq _021E694C
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -496,7 +496,7 @@ _021E692A:
 _021E6944:
 	add r0, r4, #0
 	mov r1, #3
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E694C:
 	mov r0, #0
 	pop {r3, r4, r5, pc}
@@ -527,7 +527,7 @@ ov96_021E695C: ; 0x021E695C
 	beq _021E698A
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E698A:
 	mov r0, #0
 	pop {r4, pc}
@@ -544,7 +544,7 @@ ov96_021E6990: ; 0x021E6990
 	bl ov96_021E99FC
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	add r3, r0, #0
 	mov r0, #0x18
 	add r1, r4, #0
@@ -554,7 +554,7 @@ ov96_021E6990: ; 0x021E6990
 	beq _021E69C0
 	add r0, r5, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E69C0:
 	mov r0, #0
 	pop {r4, r5, r6, pc}
@@ -584,7 +584,7 @@ _021E69EA:
 	add r0, r4, #0
 	mov r1, #0x26
 	mov r2, #6
-	bl ov96_021E5FEC
+	bl PokeathlonCourse_SetStateField07_IfDifferent
 _021E69F8:
 	mov r0, #0
 	pop {r3, r4, r5, pc}
@@ -601,7 +601,7 @@ ov96_021E6A00: ; 0x021E6A00
 	ldr r0, [r4, r0]
 	ldr r0, [r0]
 	bl Save_Pokeathlon_Get
-	bl sub_020319F0
+	bl PokeathlonSave_GetAgainUnkB00
 	add r5, r0, #0
 	mov r0, #9
 	lsl r0, r0, #8
@@ -628,7 +628,7 @@ _021E6A1E:
 	beq _021E6A4E
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E6A4E:
 	mov r0, #0
 	pop {r3, r4, r5, pc}
@@ -642,7 +642,7 @@ ov96_021E6A54: ; 0x021E6A54
 	add r4, r0, #0
 	mov r2, #1
 	str r2, [r4, r1]
-	bl ov96_021E5F5C
+	bl PokeathlonCourse_ResetDataCopyArea
 	mov r0, #0x1e
 	ldr r1, _021E6A8C ; =ov96_0221A808
 	lsl r0, r0, #4
@@ -657,7 +657,7 @@ ov96_021E6A54: ; 0x021E6A54
 	bl PokeathlonCourse_InitStateInfo
 	add r0, r4, #0
 	mov r1, #8
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -674,7 +674,7 @@ ov96_021E6A94: ; 0x021E6A94
 	cmp r0, #0
 	beq _021E6AE0
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r1, r0, #0
 	mov r2, #0
 	add r1, #0x24
@@ -683,17 +683,17 @@ ov96_021E6A94: ; 0x021E6A94
 	add r0, #0x4c
 	strb r1, [r0]
 	add r0, r4, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	mov r1, #1
 	bl ov96_021E87B0
 	add r0, r4, #0
 	mov r1, #6
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #9
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
-	bl sub_02004AD8
+	bl Sound_SetScene
 	ldr r1, _021E6AE4 ; =0x0000046F
 	mov r0, #0x19
 	mov r2, #0
@@ -716,7 +716,7 @@ ov96_021E6AE8: ; 0x021E6AE8
 	cmp r3, #0
 	bne _021E6B02
 	mov r1, #0xa
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _021E6B02:
@@ -749,7 +749,7 @@ _021E6B1E:
 	beq _021E6B5A
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -761,7 +761,7 @@ _021E6B1E:
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0xa
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E6BB6
 _021E6B5A:
 	add r0, r4, #0
@@ -831,7 +831,7 @@ ov96_021E6BC0: ; 0x021E6BC0
 _021E6BDE:
 	add r0, r4, #0
 	mov r1, #0xb
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -855,7 +855,7 @@ ov96_021E6BEC: ; 0x021E6BEC
 	bl PokeathlonCourse_InitStateInfo
 	add r0, r4, #0
 	mov r1, #0xc
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	nop
@@ -872,10 +872,10 @@ ov96_021E6C20: ; 0x021E6C20
 	beq _021E6C3C
 	add r0, r4, #0
 	mov r1, #7
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0xd
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E6C3C:
 	mov r0, #0
 	pop {r4, pc}
@@ -892,7 +892,7 @@ ov96_021E6C40: ; 0x021E6C40
 	cmp r3, #0
 	bne _021E6C5A
 	mov r1, #0xe
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 _021E6C5A:
@@ -925,7 +925,7 @@ _021E6C76:
 	beq _021E6CB0
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -937,7 +937,7 @@ _021E6C76:
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0xe
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E6CB0:
 	mov r0, #0
 	pop {r4, pc}
@@ -964,7 +964,7 @@ ov96_021E6CB8: ; 0x021E6CB8
 _021E6CD6:
 	add r0, r4, #0
 	mov r1, #0xf
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -993,7 +993,7 @@ ov96_021E6CE4: ; 0x021E6CE4
 	strb r1, [r4, r2]
 	add r3, #0x42
 	str r1, [r4, r3]
-	bl ov96_021E5F5C
+	bl PokeathlonCourse_ResetDataCopyArea
 	ldr r0, _021E6D4C ; =ov96_0221DA28
 	lsr r2, r5, #0x16
 	ldr r1, [r0, r2]
@@ -1011,7 +1011,7 @@ ov96_021E6CE4: ; 0x021E6CE4
 	bl PokeathlonCourse_InitStateInfo
 	add r0, r4, #0
 	mov r1, #0x10
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, r5, r6, pc}
 	nop
@@ -1030,7 +1030,7 @@ ov96_021E6D54: ; 0x021E6D54
 	cmp r0, #0
 	beq _021E6DD8
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r1, r0, #0
 	mov r2, #0
 	add r1, #0x24
@@ -1039,12 +1039,12 @@ ov96_021E6D54: ; 0x021E6D54
 	add r0, #0x4c
 	strb r1, [r0]
 	add r0, r4, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	mov r1, #1
 	bl ov96_021E87B0
 	add r0, r4, #0
 	mov r1, #8
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	mov r0, #0x1f
 	lsl r0, r0, #4
 	ldr r1, [r4, r0]
@@ -1054,7 +1054,7 @@ ov96_021E6D54: ; 0x021E6D54
 	cmp r1, r0
 	bne _021E6DAA
 	mov r0, #0
-	bl sub_02004AD8
+	bl Sound_SetScene
 	ldr r1, _021E6DE0 ; =0x00000472
 	mov r0, #0x18
 	mov r2, #0
@@ -1062,7 +1062,7 @@ ov96_021E6D54: ; 0x021E6D54
 	b _021E6DBA
 _021E6DAA:
 	mov r0, #0
-	bl sub_02004AD8
+	bl Sound_SetScene
 	ldr r1, _021E6DE4 ; =0x00000471
 	mov r0, #0x18
 	mov r2, #0
@@ -1073,7 +1073,7 @@ _021E6DBA:
 	bl sub_020053A8
 	add r0, r4, #0
 	mov r1, #0x11
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0x5c
 	bl GF_heap_c_dummy_return_true
 	cmp r0, #0
@@ -1114,16 +1114,16 @@ ov96_021E6DE8: ; 0x021E6DE8
 	beq _021E6E32
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E6E32
 _021E6E22:
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E6E32
 _021E6E2C:
 	mov r1, #0x12
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E6E32:
 	mov r0, #0
 	pop {r4, pc}
@@ -1141,7 +1141,7 @@ ov96_021E6E38: ; 0x021E6E38
 	cmp r3, #0
 	bne _021E6E52
 	mov r1, #0x18
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _021E6E52:
@@ -1174,7 +1174,7 @@ _021E6E6E:
 	beq _021E6EB2
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -1186,10 +1186,10 @@ _021E6E6E:
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0x10
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0x13
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E6F0E
 _021E6EB2:
 	add r0, r4, #0
@@ -1244,10 +1244,10 @@ _021E6F14: .word 0x000003D1
 ov96_021E6F18: ; 0x021E6F18
 	push {r4, lr}
 	add r4, r0, #0
-	bl ov96_021E5F5C
+	bl PokeathlonCourse_ResetDataCopyArea
 	add r0, r4, #0
 	mov r1, #0x14
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	thumb_func_end ov96_021E6F18
@@ -1295,7 +1295,7 @@ ov96_021E6F2C: ; 0x021E6F2C
 	cmp r0, #0
 	bne _021E6FE6
 	add r0, r7, #0
-	bl ov96_021E5FAC
+	bl PokeathlonCourse_GetUnkConstant4
 	add r6, r0, #0
 	add r0, r7, #0
 	bl PokeathlonCourse_GetParticipantCount
@@ -1345,7 +1345,7 @@ _021E6FE6:
 	beq _021E6FF4
 	add r0, r7, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E6FF4:
 	mov r0, #0
 	add sp, #8
@@ -1357,12 +1357,12 @@ _021E6FF4:
 ov96_021E6FFC: ; 0x021E6FFC
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	bl ov96_021E9A14
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	add r4, #0x28
 	add r3, r0, #0
 	mov r0, #0x1e
@@ -1373,7 +1373,7 @@ ov96_021E6FFC: ; 0x021E6FFC
 	beq _021E702C
 	add r0, r5, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E702C:
 	mov r0, #0
 	pop {r4, r5, r6, pc}
@@ -1417,7 +1417,7 @@ _021E7064:
 	bl ov96_021E7658
 	add r0, r4, #0
 	mov r1, #0x17
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	thumb_func_end ov96_021E7030
@@ -1460,19 +1460,19 @@ _021E70AE:
 	beq _021E70D0
 	add r0, r4, #0
 	mov r1, #0x19
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E70E6
 _021E70D0:
 	add r0, r4, #0
 	mov r1, #0x18
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E70E6
 _021E70DA:
 	add r1, r2, #1
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0x1d
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E70E6:
 	mov r0, #0
 	pop {r4, pc}
@@ -1494,11 +1494,11 @@ ov96_021E70F0: ; 0x021E70F0
 	cmp r2, r1
 	blt _021E710E
 	mov r1, #0x1d
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E7114
 _021E710E:
 	mov r1, #0xb
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E7114:
 	mov r0, #0
 	pop {r3, pc}
@@ -1524,7 +1524,7 @@ ov96_021E711C: ; 0x021E711C
 	bl PokeathlonCourse_InitStateInfo
 	add r0, r4, #0
 	mov r1, #0x1a
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	nop
@@ -1540,7 +1540,7 @@ ov96_021E7150: ; 0x021E7150
 	cmp r0, #0
 	beq _021E718C
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r1, r0, #0
 	mov r2, #0
 	add r1, #0x24
@@ -1549,15 +1549,15 @@ ov96_021E7150: ; 0x021E7150
 	add r0, #0x4c
 	strb r1, [r0]
 	add r0, r4, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	mov r1, #1
 	bl ov96_021E87B0
 	add r0, r4, #0
 	mov r1, #0xb
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0x1b
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E718C:
 	mov r0, #0
 	pop {r4, pc}
@@ -1574,7 +1574,7 @@ ov96_021E7190: ; 0x021E7190
 	cmp r3, #0
 	bne _021E71AA
 	mov r1, #0x1c
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _021E71AA:
@@ -1607,7 +1607,7 @@ _021E71C6:
 	beq _021E7202
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -1619,7 +1619,7 @@ _021E71C6:
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0x1c
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E725E
 _021E7202:
 	add r0, r4, #0
@@ -1689,7 +1689,7 @@ ov96_021E7268: ; 0x021E7268
 _021E7286:
 	add r0, r4, #0
 	mov r1, #0x18
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -1699,7 +1699,7 @@ _021E7286:
 ov96_021E7294: ; 0x021E7294
 	push {r4, lr}
 	add r4, r0, #0
-	bl ov96_021E5F5C
+	bl PokeathlonCourse_ResetDataCopyArea
 	mov r0, #0x1e
 	ldr r1, _021E72C4 ; =ov96_0221A844
 	lsl r0, r0, #4
@@ -1714,7 +1714,7 @@ ov96_021E7294: ; 0x021E7294
 	bl PokeathlonCourse_InitStateInfo
 	add r0, r4, #0
 	mov r1, #0x20
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, pc}
 	nop
@@ -1730,7 +1730,7 @@ ov96_021E72CC: ; 0x021E72CC
 	cmp r0, #0
 	beq _021E7318
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r1, r0, #0
 	mov r2, #0
 	add r1, #0x24
@@ -1739,17 +1739,17 @@ ov96_021E72CC: ; 0x021E72CC
 	add r0, #0x4c
 	strb r1, [r0]
 	add r0, r4, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	mov r1, #1
 	bl ov96_021E87B0
 	add r0, r4, #0
 	mov r1, #0xc
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0x21
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
-	bl sub_02004AD8
+	bl Sound_SetScene
 	ldr r1, _021E731C ; =0x00000474
 	mov r0, #0x19
 	mov r2, #0
@@ -1772,7 +1772,7 @@ ov96_021E7320: ; 0x021E7320
 	cmp r3, #0
 	bne _021E733A
 	mov r1, #0x22
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 _021E733A:
@@ -1805,7 +1805,7 @@ _021E7356:
 	beq _021E7392
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0xf1
 	lsl r0, r0, #2
 	add r1, r0, #0
@@ -1817,7 +1817,7 @@ _021E7356:
 	str r1, [r4, r0]
 	add r0, r4, #0
 	mov r1, #0x22
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E73EE
 _021E7392:
 	add r0, r4, #0
@@ -1902,7 +1902,7 @@ _021E7416:
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
 	bl Save_Pokeathlon_Get
-	bl sub_0203199C
+	bl PokeathlonSave_GetUnkB00
 	add r6, r0, #0
 	bl sub_02031B10
 	lsl r4, r0, #2
@@ -1934,15 +1934,15 @@ _021E7416:
 	bne _021E7496
 	add r0, r5, #0
 	mov r1, #0xe
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r5, #0
 	mov r1, #0x23
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021E749E
 _021E7496:
 	add r0, r5, #0
 	mov r1, #0x25
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E749E:
 	mov r0, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -1969,7 +1969,7 @@ ov96_021E74AC: ; 0x021E74AC
 	beq _021E74D6
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E74D6:
 	mov r0, #0
 	pop {r4, pc}
@@ -1982,12 +1982,12 @@ ov96_021E74E0: ; 0x021E74E0
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	mov r1, #0
-	bl ov96_021E5D78
+	bl PokeathlonCourse_GetFieldData_AtIndex
 	add r4, r0, #0
 	bl ov96_021E9A1C
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	add r3, r0, #0
 	mov r0, #0x20
 	add r1, r4, #0
@@ -1997,7 +1997,7 @@ ov96_021E74E0: ; 0x021E74E0
 	beq _021E7510
 	add r0, r5, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E7510:
 	mov r0, #0
 	pop {r4, r5, r6, pc}
@@ -2020,7 +2020,7 @@ ov96_021E7514: ; 0x021E7514
 	beq _021E753A
 	add r0, r4, #0
 	mov r1, #0x26
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E753A:
 	mov r0, #0
 	pop {r4, pc}
@@ -2056,7 +2056,7 @@ ov96_021E7544: ; 0x021E7544
 _021E757E:
 	add r0, r5, #0
 	mov r1, #0x25
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r4, r5, r6, pc}
 	nop
@@ -2117,7 +2117,7 @@ ov96_021E75E4: ; 0x021E75E4
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #8
 	add r7, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp]
 	add r0, r7, #0
 	bl ov96_021E5F24
@@ -2138,7 +2138,7 @@ _021E7604:
 	str r0, [sp, #4]
 _021E7614:
 	add r0, r7, #0
-	bl ov96_021E5FAC
+	bl PokeathlonCourse_GetUnkConstant4
 	add r6, r0, #0
 	ldr r0, [sp, #4]
 	bl ov96_021E8A20
@@ -2155,7 +2155,7 @@ _021E7614:
 	bl ov96_021E9A14
 	add r4, r0, #0
 	add r0, r7, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	ldr r1, [sp]
 	add r3, r0, #0
 	add r1, #0x28
@@ -2277,7 +2277,7 @@ ov96_021E7718: ; 0x021E7718
 	bl Save_Pokeathlon_Get
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5D6C
+	bl PokeathlonCourse_GetFieldData
 	add r4, r0, #0
 	mov r0, #0x7e
 	lsl r0, r0, #2
@@ -2318,7 +2318,7 @@ _021E7772:
 _021E7784:
 	add r0, r6, #0
 	add r1, r7, #0
-	bl SavePokeathlon_AddAthletePoints
+	bl PokeathlonSave_AddAthletePoints
 	mov r0, #0x7e
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
@@ -2326,17 +2326,17 @@ _021E7784:
 	cmp r0, #1
 	bne _021E77A8
 	add r0, r6, #0
-	bl sub_020319E4
+	bl PokeathlonSave_GetRecordsLink2
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov96_021E7A2C
 	b _021E780A
 _021E77A8:
 	add r0, r6, #0
-	bl sub_0203197C
+	bl PokeathlonSave_GetRecordsSolo
 	str r0, [sp, #4]
 	add r0, r6, #0
-	bl sub_02031990
+	bl PokeathlonSave_GetUnkAEC
 	add r2, r0, #0
 	ldr r1, [sp, #4]
 	add r0, r5, #0
@@ -2348,7 +2348,7 @@ _021E77A8:
 	lsr r0, r0, #0x1f
 	beq _021E77FC
 	add r0, r6, #0
-	bl sub_020319A4
+	bl PokeathlonSave_dummy2
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov96_021E786C
@@ -2358,7 +2358,7 @@ _021E77A8:
 	cmp r0, #0
 	bne _021E77FC
 	add r0, r6, #0
-	bl sub_020319A4
+	bl PokeathlonSave_dummy2
 	bl ov96_021E8060
 	cmp r0, #0
 	beq _021E77FC
@@ -2367,13 +2367,13 @@ _021E77A8:
 	bl Save_VarsFlags_SetFlagInArray
 _021E77FC:
 	add r0, r6, #0
-	bl sub_020319DC
+	bl PokeathlonSave_GetRecordsSolo2
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov96_021E7938
 _021E780A:
 	add r0, r6, #0
-	bl sub_020319F0
+	bl PokeathlonSave_GetAgainUnkB00
 	add r1, r0, #0
 	add r0, r5, #0
 	bl ov96_021E7D6C
@@ -2787,7 +2787,7 @@ _021E7B18:
 	cmp r2, #3
 	blo _021E7B18
 	ldr r0, [sp]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r6, r0, #0
 	bl PlayerProfile_GetTrainerID
 	str r0, [sp, #0x28]
@@ -3330,7 +3330,7 @@ ov96_021E7F48: ; 0x021E7F48
 	lsl r0, r0, #2
 	ldr r0, [r5, r0]
 	ldr r0, [r0]
-	bl sub_02031B00
+	bl Save_Pokeathlon_FriendshipRecords_Get
 	add r4, r0, #0
 	add r0, r5, #0
 	bl ov96_021E5F24
@@ -3469,7 +3469,7 @@ _021E803E:
 	ldrh r2, [r3, r2]
 	add r0, r7, #0
 	add r1, r6, #0
-	bl sub_020319F8
+	bl PokeathlonSave_SetUnkDC_AtIndex
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -3523,7 +3523,7 @@ _021E8098:
 	ldrh r0, [r1, r0]
 	sub r5, r0, #1
 	add r0, r7, #0
-	bl sub_02031978
+	bl PokeathlonSave_GetUnkDC
 	ldrb r0, [r0, r5]
 	cmp r0, #0x1f
 	bne _021E80B6
@@ -3547,7 +3547,7 @@ ov96_021E80C4: ; 0x021E80C4
 	ldr r0, [r0, r1]
 	ldr r0, [r0]
 	bl Save_Pokeathlon_Get
-	bl sub_020319DC
+	bl PokeathlonSave_GetRecordsSolo2
 	ldr r6, _021E8110 ; =ov96_0221A894
 	ldr r7, _021E8114 ; =_0221A7D8
 	add r5, r0, #0
@@ -3953,7 +3953,7 @@ ov96_021E839C: ; 0x021E839C
 	pop {r4, r5, r6, pc}
 _021E83C0:
 	add r0, r5, #0
-	bl ov96_021E5E44
+	bl PokeathlonCourse_GetField3D8_ForCurrentParticipant
 	add r4, r0, #0
 	mov r0, #0x7e
 	lsl r0, r0, #2
@@ -3962,12 +3962,12 @@ _021E83C0:
 	cmp r0, #1
 	bne _021E83DE
 	add r0, r6, #0
-	bl sub_020319E4
+	bl PokeathlonSave_GetRecordsLink2
 	mov r1, #0xa4
 	b _021E83E6
 _021E83DE:
 	add r0, r6, #0
-	bl sub_020319DC
+	bl PokeathlonSave_GetRecordsSolo2
 	mov r1, #0x2c
 _021E83E6:
 	mul r1, r4
@@ -4128,7 +4128,7 @@ _021E8504:
 	add r4, r0, #0
 	ldr r0, [sp]
 	ldr r1, [sp, #4]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r6, r0, #0
 	add r0, r4, #0
 	bl String_cstr
@@ -6612,10 +6612,10 @@ ov96_021E96F8: ; 0x021E96F8
 	bl ov96_021E5E04
 	add r0, r4, #0
 	mov r1, #1
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov96_021E96F8
@@ -6638,20 +6638,20 @@ ov96_021E9718: ; 0x021E9718
 	add r2, r6, #0
 	bl memcpy
 	add r0, r4, #0
-	bl ov96_021E5F00
+	bl PokeathlonCourse_IncrementField1EF
 	add r0, r4, #0
 	bl PokeathlonCourse_GetParticipantCount
 	add r5, r0, #0
 	add r0, r4, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r5, r0
 	bne _021E9780
 	add r0, r4, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r0, #4
 	bhs _021E9772
 	add r0, r4, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	mov r1, #4
 	sub r1, r1, r0
 	lsl r1, r1, #0x18
@@ -6660,10 +6660,10 @@ ov96_021E9718: ; 0x021E9718
 	bl ov96_021E8484
 _021E9772:
 	add r0, r4, #0
-	bl ov96_021E5F10
+	bl PokeathlonCourse_ResetField1EF
 	add r0, r4, #0
 	mov r1, #4
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E9780:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -6686,10 +6686,10 @@ ov96_021E9784: ; 0x021E9784
 	bl ov96_021E604C
 	add r0, r4, #0
 	mov r1, #3
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #5
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end ov96_021E9784
@@ -6706,17 +6706,17 @@ ov96_021E97B8: ; 0x021E97B8
 	beq _021E97DA
 	add r0, r4, #0
 	mov r1, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r1, r6, #0
 	add r2, r5, #0
 	bl memcpy
 _021E97DA:
 	add r0, r4, #0
 	mov r1, #4
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #6
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r4, r5, r6, pc}
 	thumb_func_end ov96_021E97B8
 
@@ -6725,22 +6725,22 @@ ov96_021E97EC: ; 0x021E97EC
 	push {r3, r4, r5, lr}
 	add r5, r3, #0
 	add r0, r5, #0
-	bl ov96_021E5F00
+	bl PokeathlonCourse_IncrementField1EF
 	add r0, r5, #0
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r4, r0
 	bne _021E981E
 	add r0, r5, #0
-	bl ov96_021E5F10
+	bl PokeathlonCourse_ResetField1EF
 	add r0, r5, #0
 	mov r1, #5
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r5, #0
 	mov r1, #7
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E981E:
 	pop {r3, r4, r5, pc}
 	thumb_func_end ov96_021E97EC
@@ -6752,7 +6752,7 @@ ov96_021E9820: ; 0x021E9820
 	add r4, r2, #0
 	add r0, r3, #0
 	add r6, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r1, r4, #0
 	add r1, #0x24
 	ldrb r1, [r1]
@@ -6781,10 +6781,10 @@ ov96_021E9858: ; 0x021E9858
 	add r4, r3, #0
 	add r0, r4, #0
 	mov r1, #0xa
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0x12
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov96_021E9858
@@ -6796,14 +6796,14 @@ ov96_021E9870: ; 0x021E9870
 	add r6, r0, #0
 	add r0, r5, #0
 	str r2, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, r5, #0
 	bl ov96_021E5F24
 	cmp r0, #0
 	bne _021E98CE
 	add r0, r5, #0
-	bl ov96_021E5FAC
+	bl PokeathlonCourse_GetUnkConstant4
 	add r7, #0x28
 	add r4, r0, #0
 	add r0, r7, #0
@@ -6815,19 +6815,19 @@ ov96_021E9870: ; 0x021E9870
 	add r2, r4, #0
 	bl memcpy
 	add r0, r5, #0
-	bl ov96_021E5F00
+	bl PokeathlonCourse_IncrementField1EF
 	add r0, r5, #0
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r4, r0
 	bne _021E98CE
 	add r0, r5, #0
-	bl ov96_021E5F10
+	bl PokeathlonCourse_ResetField1EF
 	add r0, r5, #0
 	mov r1, #0x15
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E98CE:
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end ov96_021E9870
@@ -6839,14 +6839,14 @@ ov96_021E98D0: ; 0x021E98D0
 	add r5, r1, #0
 	add r4, r2, #0
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	add r1, r4, #0
 	add r2, r5, #0
 	bl memcpy
 	add r0, r6, #0
 	mov r1, #0x16
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end ov96_021E98D0
@@ -6858,7 +6858,7 @@ ov96_021E98F4: ; 0x021E98F4
 	str r3, [sp]
 	add r0, r3, #0
 	add r7, r2, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	ldr r0, [sp]
 	bl ov96_021E5F24
 	cmp r0, #0
@@ -6866,7 +6866,7 @@ ov96_021E98F4: ; 0x021E98F4
 	lsl r1, r4, #0x18
 	ldr r0, [sp]
 	lsr r1, r1, #0x18
-	bl ov96_021E5D78
+	bl PokeathlonCourse_GetFieldData_AtIndex
 	add r5, r0, #0
 	mov r6, #0
 _021E991A:
@@ -6911,19 +6911,19 @@ _021E991A:
 	cmp r6, #3
 	blo _021E991A
 	ldr r0, [sp]
-	bl ov96_021E5F00
+	bl PokeathlonCourse_IncrementField1EF
 	ldr r0, [sp]
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r4, r0
 	bne _021E9990
 	ldr r0, [sp]
-	bl ov96_021E5F10
+	bl PokeathlonCourse_ResetField1EF
 	ldr r0, [sp]
 	mov r1, #0x1e
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E9990:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -6934,15 +6934,15 @@ ov96_021E9994: ; 0x021E9994
 	push {r4, lr}
 	add r4, r3, #0
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, r4, #0
 	bl ov96_021E5F24
 	add r0, r4, #0
 	mov r1, #0xd
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r4, #0
 	mov r1, #0x1f
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end ov96_021E9994
@@ -6952,24 +6952,24 @@ ov96_021E99B8: ; 0x021E99B8
 	push {r3, r4, r5, lr}
 	add r5, r3, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, r5, #0
-	bl ov96_021E5F00
+	bl PokeathlonCourse_IncrementField1EF
 	add r0, r5, #0
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5EF4
+	bl PokeathlonCourse_GetField1EF
 	cmp r4, r0
 	bne _021E99F0
 	add r0, r5, #0
-	bl ov96_021E5F10
+	bl PokeathlonCourse_ResetField1EF
 	add r0, r5, #0
 	mov r1, #0xf
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add r0, r5, #0
 	mov r1, #0x24
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021E99F0:
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -7040,32 +7040,32 @@ _021E9A28: .word sub_02031B10
 
 	thumb_func_start ov96_021E9A2C
 ov96_021E9A2C: ; 0x021E9A2C
-	ldr r3, _021E9A34 ; =ov96_021E5FA4
+	ldr r3, _021E9A34 ; =PokeathlonCourse_GetField3A4
 	add r0, r1, #0
 	bx r3
 	nop
-_021E9A34: .word ov96_021E5FA4
+_021E9A34: .word PokeathlonCourse_GetField3A4
 	thumb_func_end ov96_021E9A2C
 
 	thumb_func_start ov96_021E9A38
 ov96_021E9A38: ; 0x021E9A38
-	ldr r3, _021E9A44 ; =ov96_021E5F44
+	ldr r3, _021E9A44 ; =PokeathlonCourse_GetField974_AtIndex
 	add r2, r0, #0
 	add r0, r1, #0
 	add r1, r2, #0
 	bx r3
 	nop
-_021E9A44: .word ov96_021E5F44
+_021E9A44: .word PokeathlonCourse_GetField974_AtIndex
 	thumb_func_end ov96_021E9A38
 
 	thumb_func_start ov96_021E9A48
 ov96_021E9A48: ; 0x021E9A48
-	ldr r3, _021E9A50 ; =ov96_021E5D78
+	ldr r3, _021E9A50 ; =PokeathlonCourse_GetFieldData_AtIndex
 	add r0, r1, #0
 	mov r1, #0
 	bx r3
 	.balign 4, 0
-_021E9A50: .word ov96_021E5D78
+_021E9A50: .word PokeathlonCourse_GetFieldData_AtIndex
 	thumb_func_end ov96_021E9A48
 
 	thumb_func_start ov96_021E9A54
@@ -7074,7 +7074,7 @@ ov96_021E9A54: ; 0x021E9A54
 	add r4, r0, #0
 	add r0, r1, #0
 	add r5, r2, #0
-	bl ov96_021E5D88
+	bl PokeathlonCourse_GetFieldBA4
 	add r1, r4, #0
 	mul r1, r5
 	add r0, r0, r1
@@ -10957,7 +10957,7 @@ _021EB712:
 	beq _021EB728
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021EB728
 _021EB724:
 	bl GF_AssertFail
@@ -10977,7 +10977,7 @@ ov96_021EB730: ; 0x021EB730
 	add r4, r0, #0
 	ldr r0, [sp, #0xc]
 	mov r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #1
 	bne _021EB750
 	ldr r0, [sp, #0xc]
@@ -11142,7 +11142,7 @@ _021EB882:
 	add r1, #0xb2
 	ldrb r1, [r1]
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r6, #0
 	mov r1, #0
@@ -11238,7 +11238,7 @@ _021EB940:
 	b _021EB990
 _021EB94A:
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	beq _021EB95E
 	ldr r0, [sp, #0xc]
@@ -11261,7 +11261,7 @@ _021EB978:
 	bl ov96_021EE944
 	ldr r0, [sp, #0xc]
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	add sp, #0x14
 	mov r0, #0
 	pop {r4, r5, r6, r7, pc}
@@ -11487,7 +11487,7 @@ _021EBB46:
 	beq _021EBB5C
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021EBB5C
 _021EBB58:
 	bl GF_AssertFail
@@ -11514,7 +11514,7 @@ ov96_021EBB64: ; 0x021EBB64
 	ldr r0, [r0]
 	bl ov96_021ED0C8
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #1
 	bne _021EBB96
 	add r0, r6, #0
@@ -11850,7 +11850,7 @@ _021EBE20:
 	b _021EC188
 _021EBE22:
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	bne _021EBE30
 	mov r0, #3
@@ -12002,7 +12002,7 @@ _021EBF44:
 	str r0, [sp, #0xc]
 	ldr r1, [sp, #0xc]
 	add r0, r6, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -12084,7 +12084,7 @@ _021EC008:
 	lsl r1, r1, #4
 	lsr r1, r1, #0x1c
 	mov r7, #0x1b
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -12135,7 +12135,7 @@ _021EC07E:
 	ldrb r0, [r0]
 	str r0, [sp, #8]
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	bne _021EC110
 	add r0, r4, #0
@@ -12156,7 +12156,7 @@ _021EC0B0:
 	add r0, r6, #0
 	bl PokeathlonCourse_GetSaveData
 	bl Save_Pokeathlon_Get
-	bl sub_020319A4
+	bl PokeathlonSave_dummy2
 	add r1, r4, #0
 	add r1, #0x9c
 	ldr r1, [r1]
@@ -12184,7 +12184,7 @@ _021EC0B0:
 	lsl r1, r1, #4
 	lsr r1, r1, #0x1c
 	mov r7, #0x1d
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r5, #0
 	mov r1, #0
@@ -12222,7 +12222,7 @@ _021EC126:
 	b _021EC188
 _021EC142:
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	beq _021EC156
 	add r0, r6, #0
@@ -12245,7 +12245,7 @@ _021EC170:
 	bl ov96_021EE944
 	add r0, r6, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	add sp, #0x18
 	mov r0, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -14358,7 +14358,7 @@ ov96_021ED1D0: ; 0x021ED1D0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0xc]
 	ldr r0, [sp, #8]
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #3
 	bls _021ED1E8
 	b _021ED462
@@ -14434,7 +14434,7 @@ _021ED1FC:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	ldr r0, [sp, #8]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021ED466
 _021ED296:
 	mov r0, #0
@@ -14507,7 +14507,7 @@ _021ED2D2:
 	add r3, sp, #0x14
 	bl ov96_021EA8A8
 	ldr r0, [sp, #8]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021ED466
 _021ED336:
 	ldr r0, [sp, #0xc]
@@ -14549,15 +14549,15 @@ _021ED344:
 	str r1, [sp, #0xc]
 	bl ov96_021ECAC4
 	ldr r0, [sp, #8]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021ED466
 _021ED39A:
 	ldr r0, [sp, #0xc]
 	ldr r0, [r0, #4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, [sp, #8]
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r5, #0
 	add r6, r5, #0
 _021ED3AE:
@@ -14606,7 +14606,7 @@ _021ED3AE:
 	ldr r1, [r1]
 	bl ov96_021EC3D8
 	ldr r0, [sp, #8]
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r4, r0, #0
 	ldr r0, [sp, #8]
 	bl PokeathlonCourse_GetSaveData
@@ -14768,7 +14768,7 @@ ov96_021ED578: ; 0x021ED578
 	add r4, r0, #0
 	add r0, r5, #0
 	add r1, r6, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r4, #0
 	mov r1, #0
@@ -14793,7 +14793,7 @@ ov96_021ED5AC: ; 0x021ED5AC
 	add r7, r0, #0
 	add r0, r5, #0
 	add r1, r4, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	add r0, r7, #0
 	mov r1, #0
@@ -14810,7 +14810,7 @@ ov96_021ED5AC: ; 0x021ED5AC
 ov96_021ED5E0: ; 0x021ED5E0
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -14842,7 +14842,7 @@ ov96_021ED618: ; 0x021ED618
 	add r1, r1, r3
 	add r6, r0, #0
 	add r4, r2, r1
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -14880,7 +14880,7 @@ ov96_021ED660: ; 0x021ED660
 	add r1, r1, r3
 	add r6, r0, #0
 	add r4, r2, r1
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -14918,7 +14918,7 @@ ov96_021ED6A8: ; 0x021ED6A8
 	add r1, r1, r3
 	add r6, r0, #0
 	add r4, r2, r1
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -14961,7 +14961,7 @@ ov96_021ED6F8: ; 0x021ED6F8
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	add r6, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -14988,11 +14988,11 @@ ov96_021ED728: ; 0x021ED728
 	add r6, r1, #0
 	add r1, r2, #0
 	add r5, r0, #0
-	bl ov96_021E5E58
+	bl PokeathlonCourse_GetField3D8_AtIndex
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
 	add r0, r5, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r1, r4, #0
 	add r2, r6, #0
 	bl ov96_021E95D8
@@ -15021,7 +15021,7 @@ ov96_021ED750: ; 0x021ED750
 ov96_021ED754: ; 0x021ED754
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15050,7 +15050,7 @@ _021ED77E:
 ov96_021ED78C: ; 0x021ED78C
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15079,7 +15079,7 @@ _021ED7B6:
 ov96_021ED7C4: ; 0x021ED7C4
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15109,7 +15109,7 @@ ov96_021ED7FC: ; 0x021ED7FC
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
 	add r5, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15142,7 +15142,7 @@ ov96_021ED838: ; 0x021ED838
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	add r6, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15170,7 +15170,7 @@ ov96_021ED86C: ; 0x021ED86C
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	add r6, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15200,7 +15200,7 @@ ov96_021ED8A4: ; 0x021ED8A4
 	push {r3, r4, r5, r6, r7, lr}
 	add r5, r0, #0
 	add r6, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15229,12 +15229,12 @@ _021ED8D0:
 ov96_021ED8DC: ; 0x021ED8DC
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	bne _021ED922
 	mov r6, #0
@@ -15433,10 +15433,10 @@ ov96_021EDA58: ; 0x021EDA58
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x38
 	str r0, [sp]
-	bl ov96_021E5D6C
+	bl PokeathlonCourse_GetFieldData
 	str r0, [sp, #0x10]
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -15760,7 +15760,7 @@ _021EDCB0:
 ov96_021EDCB4: ; 0x021EDCB4
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -15792,7 +15792,7 @@ ov96_021EDCEC: ; 0x021EDCEC
 	add r7, r1, #0
 	add r4, r2, #0
 	add r5, r3, #0
-	bl ov96_021E5D6C
+	bl PokeathlonCourse_GetFieldData
 	add r6, r0, #0
 	cmp r4, #4
 	blo _021EDD02
@@ -15995,7 +15995,7 @@ ov96_021EDE64: ; 0x021EDE64
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp]
 	add r0, r4, #0
-	bl ov96_021E5D6C
+	bl PokeathlonCourse_GetFieldData
 	add r7, r0, #0
 	ldr r0, [sp]
 	add r0, #0x9c
@@ -16333,7 +16333,7 @@ _021EE0CE:
 	add r0, r2, #0
 	bl PokeathlonCourse_GetSaveData
 	bl Save_Pokeathlon_Get
-	bl sub_020319F0
+	bl PokeathlonSave_GetAgainUnkB00
 	add r6, r0, #0
 	add r0, sp, #0x20
 	add r1, r6, #0
@@ -16406,7 +16406,7 @@ _021EE166:
 	bne _021EE166
 	add r0, r3, #0
 	add r1, r2, #0
-	bl ov96_021E5F44
+	bl PokeathlonCourse_GetField974_AtIndex
 	add r6, r0, #0
 	add r0, sp, #0x20
 	add r1, r6, #0
@@ -16637,7 +16637,7 @@ ov96_021EE324: ; 0x021EE324
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x14]
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x10]
 	add r0, #0x28
 	bl ov96_021E8A20
@@ -16780,7 +16780,7 @@ ov96_021EE440: ; 0x021EE440
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x14]
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x10]
 	add r0, #0x28
 	bl ov96_021E8A20
@@ -16910,7 +16910,7 @@ _021EE548: .word 0xEFFFFFFF
 ov96_021EE54C: ; 0x021EE54C
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -16938,7 +16938,7 @@ _021EE576:
 ov96_021EE580: ; 0x021EE580
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -17734,7 +17734,7 @@ ov96_021EEB84: ; 0x021EEB84
 	add r0, r4, #0
 	add r1, r2, #0
 	add r5, r3, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r7, r0, #0
 	add r0, r4, #0
 	bl PokeathlonCourse_GetHeapID
@@ -18073,7 +18073,7 @@ ov96_021EEE0C: ; 0x021EEE0C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #3
 	bhi _021EEEAE
 	add r0, r0, r0
@@ -18091,7 +18091,7 @@ _021EEE36:
 	add r0, r5, #0
 	bl ov96_021EEFAC
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021EEEB2
 _021EEE44:
 	mov r0, #1
@@ -18113,7 +18113,7 @@ _021EEE44:
 	add r3, r0, #0
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021EEEB2
 _021EEE78:
 	bl IsPaletteFadeFinished
@@ -18123,7 +18123,7 @@ _021EEE78:
 	ldr r1, _021EEEB8 ; =0x00000136
 	bl ov96_021EE8CC
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021EEEB2
 _021EEE90:
 	ldr r0, [r4, #8]
@@ -18134,7 +18134,7 @@ _021EEE90:
 	bl ov96_021EE994
 	add r0, r5, #0
 	mov r1, #0x11
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	add sp, #0xc
 	mov r0, #1
 	pop {r4, r5, pc}
@@ -18321,7 +18321,7 @@ ov96_021EEFAC: ; 0x021EEFAC
 	bl ov96_021EE740
 	str r0, [r4, #8]
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r6, r0, #0
 	add r0, r5, #0
 	bl PokeathlonCourse_GetSaveData
@@ -18432,7 +18432,7 @@ ov96_021EF0FC: ; 0x021EF0FC
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #0
 	beq _021EF116
 	cmp r0, #1
@@ -18442,7 +18442,7 @@ _021EF116:
 	add r0, r5, #0
 	bl ov96_021EF2C0
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021EF186
 _021EF124:
 	add r0, r4, #0
@@ -18474,10 +18474,10 @@ _021EF124:
 	bl GfGfx_EngineBTogglePlanes
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, r5, #0
 	mov r1, #0
-	bl ov96_021E5DE0
+	bl PokeathlonCourse_SetField1ED
 	mov r0, #1
 	pop {r3, r4, r5, pc}
 _021EF182:
@@ -18628,7 +18628,7 @@ _021EF29E:
 	thumb_func_start ov96_021EF2A0
 ov96_021EF2A0: ; 0x021EF2A0
 	push {r3, lr}
-	bl ov96_021E5E44
+	bl PokeathlonCourse_GetField3D8_ForCurrentParticipant
 	lsl r0, r0, #0x18
 	lsr r0, r0, #0x18
 	pop {r3, pc}
@@ -18698,12 +18698,12 @@ ov96_021EF2C0: ; 0x021EF2C0
 	add r1, #0x20
 	strb r0, [r1]
 	add r0, r5, #0
-	bl ov96_021E5EE0
+	bl PokeathlonCourse_GetCurrentParticipantIndex
 	add r1, r4, #0
 	add r1, #0x22
 	strb r0, [r1]
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #1
 	bne _021EF358
 	mov r0, #1
@@ -19036,7 +19036,7 @@ ov96_021EF5F4: ; 0x021EF5F4
 	add r4, r1, #0
 	bl PokeathlonCourse_GetSaveData
 	bl Save_Pokeathlon_Get
-	bl sub_020319DC
+	bl PokeathlonSave_GetRecordsSolo2
 	mov r1, #0x2c
 	mul r1, r4
 	ldrh r0, [r0, r1]
@@ -19972,7 +19972,7 @@ _021EFD88:
 _021EFD8C:
 	ldr r1, [r4, #0x18]
 	add r0, r5, #0
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	add sp, #0xc
 	pop {r4, r5, pc}
 	.balign 4, 0
@@ -20099,7 +20099,7 @@ _021EFE70:
 _021EFE8A:
 	add r0, r6, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021EFEAC
 _021EFE94:
 	ldr r0, [r5, #0x1c]
@@ -20109,7 +20109,7 @@ _021EFE94:
 	blt _021EFEAC
 	add r0, r6, #0
 	mov r1, #4
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021EFEAC
 _021EFEA8:
 	bl GF_AssertFail
@@ -20159,7 +20159,7 @@ _021EFEF2:
 _021EFF02:
 	add r0, r5, #0
 	mov r1, #4
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _021EFF10
 _021EFF0C:
 	bl GF_AssertFail
@@ -20363,7 +20363,7 @@ ov96_021F008C: ; 0x021F008C
 	b _021F00F8
 _021F00AA:
 	add r0, r6, #0
-	bl ov96_021E5EE0
+	bl PokeathlonCourse_GetCurrentParticipantIndex
 	cmp r0, #0
 	bne _021F00BC
 	ldr r0, _021F0100 ; =0x000008E4
@@ -20416,7 +20416,7 @@ ov96_021F010C: ; 0x021F010C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	add r0, r7, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #5
 	bls _021F0124
 	b _021F08C4
@@ -20522,7 +20522,7 @@ _021F013C:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r7, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F08C4
 _021F0216:
 	ldr r0, [r6, #0x14]
@@ -20535,7 +20535,7 @@ _021F0216:
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	add r0, r7, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r2, r0, #0
 	mov r1, #4
 	ldr r0, [r6, #0x14]
@@ -20564,7 +20564,7 @@ _021F0216:
 	add r0, r7, #0
 	bl ov96_021E64B8
 	add r0, r7, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F08C4
 _021F027A:
 	ldr r4, _021F04A8 ; =ov96_0221BC70
@@ -20788,7 +20788,7 @@ _021F03FC:
 	ldr r1, [r6, r1]
 	bl ov96_021F3F80
 	add r0, r7, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F08C4
 	nop
 _021F0484: .word 0xFFFFE0FF
@@ -20898,7 +20898,7 @@ _021F04C6:
 	add r3, sp, #0xf4
 	bl ov96_021EA8A8
 	add r0, r7, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F08C4
 _021F0588:
 	ldr r0, _021F08CC ; =0x0000076C
@@ -20912,10 +20912,10 @@ _021F0596:
 	bl ov96_021E5F24
 	str r0, [sp, #0x40]
 	ldr r0, [r6]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	add r0, r7, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, sp, #0xb4
 	mov r1, #0xaa
 	mov r2, #0xb
@@ -21109,7 +21109,7 @@ _021F0740:
 	cmp r0, #0
 	bne _021F0766
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, #0
@@ -21275,7 +21275,7 @@ _021F07F6:
 	mov r0, #1
 	bl sub_0203A994
 	add r0, r7, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F08C4
 _021F08BE:
 	add sp, #0x1f8
@@ -21311,7 +21311,7 @@ ov96_021F08F4: ; 0x021F08F4
 	add r5, r0, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r0, r5, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -21320,7 +21320,7 @@ _021F090E:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -21486,7 +21486,7 @@ ov96_021F0A7C: ; 0x021F0A7C
 _021F0A98:
 	add r0, r5, #0
 	mov r1, #0x15
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	ldrb r0, [r4]
 	add r0, r0, #1
 	strb r0, [r4]
@@ -21513,7 +21513,7 @@ _021F0AC8:
 	beq _021F0AD8
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021F0AD8:
 	mov r0, #0
 	add sp, #0xc
@@ -21575,7 +21575,7 @@ _021F0B28:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021F0B52:
 	mov r0, #0
 	add sp, #0xc
@@ -21629,7 +21629,7 @@ _021F0B9E:
 	lsl r2, r6, #0x10
 	ldr r0, [sp]
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, #0x90
 	cmp r4, #3
@@ -22217,7 +22217,7 @@ ov96_021F107C: ; 0x021F107C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	bl ov96_021E8A20
 	add r6, r0, #0
@@ -22328,7 +22328,7 @@ ov96_021F1170: ; 0x021F1170
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x2c
 	str r0, [sp, #4]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x14]
 	ldr r0, [sp, #4]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -22924,7 +22924,7 @@ ov96_021F1614: ; 0x021F1614
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	str r0, [sp, #0x4c]
@@ -22988,7 +22988,7 @@ ov96_021F1614: ; 0x021F1614
 	cmp r0, #0
 	bne _021F16B4
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	mov r1, #0
 	strb r1, [r0, #8]
@@ -25716,7 +25716,7 @@ _021F2BDE:
 	str r0, [r4, #4]
 	strb r0, [r4]
 	ldr r0, [r4, #0x30]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	mov r1, #1
 	strb r1, [r0, #8]
@@ -25949,7 +25949,7 @@ ov96_021F2D98: ; 0x021F2D98
 	cmp r0, #0
 	beq _021F2DC0
 	ldr r0, [r4, #0x30]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	mov r1, #1
 	strb r1, [r0, #8]
@@ -28699,7 +28699,7 @@ _021F425A:
 	str r0, [sp, #0x10]
 	ldr r0, [r5, #4]
 	ldr r1, [sp, #0x10]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5]
 	bl PlayerProfile_GetPlayerName_NewString
 	mov r1, #0
@@ -28741,7 +28741,7 @@ _021F42D2:
 	beq _021F4332
 	ldr r0, [r5, #4]
 	add r1, r4, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5]
 	bl PlayerProfile_GetPlayerName_NewString
 	add r7, r0, #0
@@ -30447,7 +30447,7 @@ ov96_021F5018: ; 0x021F5018
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #6
 	bls _021F5030
 	b _021F54AE
@@ -30555,7 +30555,7 @@ _021F504A:
 	lsl r1, r1, #0xc
 	str r0, [r4, r1]
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F5128:
 	ldr r0, [r4, #0x54]
@@ -30567,10 +30567,10 @@ _021F5128:
 	bl PokeathlonCourse_GetParticipantCount
 	add r5, r0, #0
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r6, r0, #0
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r3, r0, #0
 	ldr r0, [sp, #0x14]
 	mov r1, #4
@@ -30583,7 +30583,7 @@ _021F5128:
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F516A:
 	ldr r5, _021F53D4 ; =ov96_0221C0B8
@@ -30624,7 +30624,7 @@ _021F516A:
 	ldr r0, [r4, #0x60]
 	bl ov96_021EB3A4
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F51CA:
 	ldr r0, [sp, #0x14]
@@ -30669,7 +30669,7 @@ _021F51DC:
 	add r3, sp, #0xdc
 	bl ov96_021EA8A8
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F522C:
 	mov r0, #0x63
@@ -30696,10 +30696,10 @@ _021F523C:
 	mov r1, #1
 	bl Sprite_SetDrawPriority
 	ldr r0, [r4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, [sp, #0x14]
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, sp, #0x78
 	mov r1, #0xaa
 	mov r2, #0x10
@@ -30812,7 +30812,7 @@ _021F5288:
 	lsr r1, r1, #0x18
 	bl ov96_021F6DA4
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F5374:
 	mov r0, #1
@@ -30945,7 +30945,7 @@ _021F5436:
 	mov r0, #1
 	bl sub_0203A994
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F54AE
 _021F54A2:
 	add r0, r4, #0
@@ -30981,7 +30981,7 @@ ov96_021F54D4: ; 0x021F54D4
 	add r5, r0, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r0, r5, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -30990,7 +30990,7 @@ _021F54EE:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -31069,7 +31069,7 @@ _021F5598:
 	ldr r0, [r4]
 	bl Heap_Free
 	add r0, r7, #0
-	bl ov96_021E5F8C
+	bl PokeathlonCourse_ResetField3A4
 	ldr r0, [r4, #0x60]
 	bl ov96_021EB21C
 	mov r0, #0x63
@@ -31167,7 +31167,7 @@ _021F567C:
 	bl ov96_021F5B60
 	add r0, r5, #0
 	mov r1, #0x14
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	ldrb r0, [r4]
 	add r0, r0, #1
 	strb r0, [r4]
@@ -31241,7 +31241,7 @@ _021F56FE:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021F5728:
 	mov r0, #0
 	add sp, #0xc
@@ -31294,7 +31294,7 @@ _021F577A:
 	add r0, r5, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	cmp r6, #0
 	bne _021F5842
 	add r0, r5, #0
@@ -31374,7 +31374,7 @@ _021F57E0:
 	add r0, r5, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	ldr r0, [sp, #8]
 	add r0, r0, #1
 	str r0, [sp, #8]
@@ -31657,7 +31657,7 @@ ov96_021F5A88: ; 0x021F5A88
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	add r5, r0, #0
 	ldr r1, _021F5B58 ; =0x00000142
@@ -31786,7 +31786,7 @@ ov96_021F5BA0: ; 0x021F5BA0
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x28
 	str r0, [sp, #8]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	ldr r0, [sp, #8]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -32180,7 +32180,7 @@ _021F5EC0: .word 0x00000FB4
 ov96_021F5EC4: ; 0x021F5EC4
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r7, r0, #0
@@ -34333,7 +34333,7 @@ _021F6F8E:
 	str r0, [sp, #0x14]
 	ldr r0, [sp, #0x10]
 	ldr r1, [sp, #0x14]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r7, #0x54]
 	bl PlayerProfile_GetPlayerName_NewString
 	mov r1, #0
@@ -34360,7 +34360,7 @@ _021F6FE4:
 	beq _021F7026
 	ldr r0, [sp, #0x10]
 	add r1, r5, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r7, #0x54]
 	bl PlayerProfile_GetPlayerName_NewString
 	add r6, r0, #0
@@ -35587,7 +35587,7 @@ ov96_021F7934: ; 0x021F7934
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #5
 	bls _021F794C
 	b _021F7C2E
@@ -35654,7 +35654,7 @@ _021F7964:
 	add r3, r5, #0
 	bl ov96_021F8094
 	add r0, r5, #0
-	bl ov96_021E5E44
+	bl PokeathlonCourse_GetField3D8_ForCurrentParticipant
 	ldr r1, [r4]
 	bl ov96_021EE5B4
 	add r1, r4, #0
@@ -35667,7 +35667,7 @@ _021F7964:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F7C32
 _021F7A04:
 	ldr r6, _021F7C44 ; =ov96_0221C2A8
@@ -35690,7 +35690,7 @@ _021F7A04:
 	add r3, r1, #0
 	bl ov96_021EB5C8
 	add r0, r5, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r7, r0, #0
 	bl ov96_021E9524
 	add r6, r0, #0
@@ -35731,11 +35731,11 @@ _021F7A04:
 	mov r2, #0xb
 	bl ov96_021EEA88
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F7C32
 _021F7AA0:
 	ldr r0, [r4, #0xc]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, [r4, #0xc]
 	ldr r1, [r4]
 	bl ov96_021F7D30
@@ -35757,7 +35757,7 @@ _021F7AA0:
 	mov r1, #0
 	bl GfGfx_EngineBTogglePlanes
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r6, r0, #0
 	add r0, r5, #0
 	bl PokeathlonCourse_GetSaveData
@@ -35833,7 +35833,7 @@ _021F7AA0:
 	add r0, #0x84
 	bl ov96_021F78C4
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F7C32
 _021F7B90:
 	add r0, r5, #0
@@ -35841,7 +35841,7 @@ _021F7B90:
 	cmp r0, #0
 	bne _021F7BB4
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -35851,7 +35851,7 @@ _021F7B90:
 	strb r1, [r4]
 _021F7BB4:
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #1
 	bne _021F7BCC
 	mov r0, #1
@@ -35873,9 +35873,9 @@ _021F7BCC:
 	bl GfGfx_EngineBTogglePlanes
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F7C32
 _021F7BFC:
 	ldr r0, _021F7C48 ; =0x00000473
@@ -35891,7 +35891,7 @@ _021F7BFC:
 	add r3, r0, #0
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F7C32
 _021F7C20:
 	bl IsPaletteFadeFinished
@@ -36168,7 +36168,7 @@ ov96_021F7DA8: ; 0x021F7DA8
 	thumb_func_start ov96_021F7E64
 ov96_021F7E64: ; 0x021F7E64
 	push {r3, lr}
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	ldrb r0, [r0, #2]
@@ -36188,7 +36188,7 @@ ov96_021F7E74: ; 0x021F7E74
 	str r0, [sp, #0x18]
 	bl IsFanfarePlaying
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #1
 	bne _021F7E9E
 	add r0, r6, #0
@@ -36256,7 +36256,7 @@ _021F7F0C:
 	add r5, sp, #0x1c
 _021F7F10:
 	add r0, r6, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	lsl r1, r4, #0x18
 	lsr r1, r1, #0x18
 	bl ov96_021E94EC
@@ -36276,7 +36276,7 @@ _021F7F10:
 _021F7F38:
 	ldr r1, [r2]
 	add r0, r6, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	add r2, r0, #0
 	ldr r0, [sp, #0x10]
 	mov r1, #0
@@ -36322,10 +36322,10 @@ _021F7F94:
 	mov r5, #0
 _021F7F96:
 	add r0, r6, #0
-	bl ov96_021E5E44
+	bl PokeathlonCourse_GetField3D8_ForCurrentParticipant
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r1, r4, #0
 	add r2, r5, #0
 	bl ov96_021E95D8
@@ -36377,7 +36377,7 @@ _021F7FF2:
 	b _021F805C
 _021F800A:
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	beq _021F801E
 	add r0, r6, #0
@@ -36850,7 +36850,7 @@ ov96_021F8378: ; 0x021F8378
 	add r0, r1, #0
 	add r4, r2, #0
 	add r6, r3, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r7, r0, #0
 	bl ov96_021E9524
 	add r2, r5, #0
@@ -36903,10 +36903,10 @@ ov96_021F83D0: ; 0x021F83D0
 ov96_021F83DC: ; 0x021F83DC
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
-	bl ov96_021E5EE0
+	bl PokeathlonCourse_GetCurrentParticipantIndex
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	bne _021F83F4
 	add r4, #0xf6
@@ -36923,10 +36923,10 @@ _021F83F6:
 ov96_021F83FC: ; 0x021F83FC
 	push {r4, r5, r6, lr}
 	add r6, r0, #0
-	bl ov96_021E5EE0
+	bl PokeathlonCourse_GetCurrentParticipantIndex
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r5, r0, #0
@@ -36936,7 +36936,7 @@ ov96_021F83FC: ; 0x021F83FC
 	bl GF_AssertFail
 _021F841E:
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	cmp r0, #0
 	ldrb r2, [r5]
 	bne _021F8438
@@ -37183,7 +37183,7 @@ ov96_021F85F4: ; 0x021F85F4
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x14]
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x10]
 	add r0, #0x28
 	bl ov96_021E8A20
@@ -37930,7 +37930,7 @@ ov96_021F8BC0: ; 0x021F8BC0
 	add r5, r0, #0
 	ldr r0, [r5, #4]
 	add r4, r2, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5]
 	bl PlayerProfile_GetPlayerName_NewString
 	add r6, r0, #0
@@ -38539,7 +38539,7 @@ _021F908C:
 	blt _021F908C
 	ldr r0, [sp, #0x10]
 	ldr r1, [sp, #0x18]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r6]
 	bl PlayerProfile_GetPlayerName_NewString
 	add r4, r0, #0
@@ -38733,7 +38733,7 @@ ov96_021F91E8: ; 0x021F91E8
 ov96_021F9234: ; 0x021F9234
 	push {r3, lr}
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	mov r0, #0
 	pop {r3, pc}
 	thumb_func_end ov96_021F9234
@@ -38839,12 +38839,12 @@ _021F9306:
 	add r0, r7, #0
 	bl ov96_021FB630
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	mov r1, #1
 	strb r1, [r0, #9]
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	ldr r0, [r0]
@@ -38880,7 +38880,7 @@ _021F9340:
 	bl BeginNormalPaletteFade
 	add r0, r7, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021F9370:
 	add r0, r7, #0
 	bl ov96_021FAF1C
@@ -38934,7 +38934,7 @@ _021F93B4:
 	ldr r0, [sp]
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	cmp r4, #0
 	bne _021F94A0
 	ldr r0, [sp]
@@ -39024,7 +39024,7 @@ _021F9466:
 	ldr r0, [sp]
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	ldr r0, [sp, #0x10]
 	add r0, r0, #1
 	str r0, [sp, #0x10]
@@ -39045,7 +39045,7 @@ ov96_021F94A8: ; 0x021F94A8
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #8
 	bls _021F94C0
 	b _021F9C8A
@@ -39131,7 +39131,7 @@ _021F94DE:
 	add r0, r6, #0
 	add r1, r5, #0
 	add r2, r7, #0
-	bl ov96_021E5F70
+	bl PokeathlonCourse_SetField3A4
 	add r0, r6, #0
 	mov r1, #8
 	bl ov96_021E6670
@@ -39174,7 +39174,7 @@ _021F94DE:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F95E8:
 	ldr r5, _021F987C ; =ov96_0221C404
@@ -39459,7 +39459,7 @@ _021F95E8:
 	lsl r1, r1, #2
 	str r0, [r4, r1]
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 	nop
 _021F986C: .word 0xFFFFE0FF
@@ -39708,7 +39708,7 @@ _021F9A34:
 	add r3, sp, #0x13c
 	bl ov96_021EA8A8
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9A94:
 	mov r0, #0xe9
@@ -39720,12 +39720,12 @@ _021F9A94:
 	b _021F9C8A
 _021F9AA4:
 	ldr r0, [r4, #4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, [r4, #4]
 	ldr r1, [r4]
 	bl ov96_021F9FE8
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9ABA:
 	ldr r0, [r4, #4]
@@ -39744,7 +39744,7 @@ _021F9ABA:
 	str r1, [r0, #4]
 	str r1, [r0, #8]
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9AE2:
 	mov r0, #0x10
@@ -39755,7 +39755,7 @@ _021F9AE2:
 	bl GfGfx_EngineBTogglePlanes
 	add r0, r6, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r7, #0xe9
 	mov r5, #0
 	lsl r7, r7, #2
@@ -39770,7 +39770,7 @@ _021F9B00:
 	cmp r5, #3
 	blt _021F9B00
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9B1E:
 	add r0, r6, #0
@@ -39782,7 +39782,7 @@ _021F9B1E:
 	bl ov96_021FC144
 _021F9B30:
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9B38:
 	add r0, r4, #0
@@ -39888,7 +39888,7 @@ _021F9B96:
 	bl ov96_021FBBB4
 _021F9C12:
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r5, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -39934,7 +39934,7 @@ _021F9C56:
 	mov r3, #0
 	bl BeginNormalPaletteFade
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021F9C8A
 _021F9C7C:
 	bl IsPaletteFadeFinished
@@ -39979,7 +39979,7 @@ ov96_021F9CC4: ; 0x021F9CC4
 	add r6, r0, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r0, r6, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	str r0, [sp, #0x1c]
 	bl ov96_021E9510
 	mov r5, #0
@@ -39987,7 +39987,7 @@ _021F9CDC:
 	lsl r1, r5, #0x18
 	add r0, r6, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r4, r0, #0
 	mov r1, #0x1e
 	bl _s32_div_f
@@ -40046,7 +40046,7 @@ ov96_021F9D58: ; 0x021F9D58
 	add r4, r0, #0
 	bl sub_0203A914
 	add r0, r5, #0
-	bl ov96_021E5F1C
+	bl PokeathlonCourse_GetSystem
 	mov r1, #0
 	bl ov96_021E87B0
 	mov r0, #0x8a
@@ -40054,7 +40054,7 @@ ov96_021F9D58: ; 0x021F9D58
 	ldr r0, [r4, r0]
 	bl ov96_021FC1A8
 	add r0, r5, #0
-	bl ov96_021E5F8C
+	bl PokeathlonCourse_ResetField3A4
 	add r0, r4, #0
 	add r0, #0xdc
 	ldr r0, [r0]
@@ -42227,7 +42227,7 @@ ov96_021FAF1C: ; 0x021FAF1C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r5, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	bl ov96_021E8A20
 	mov r7, #0x23
@@ -42472,7 +42472,7 @@ ov96_021FB0F4: ; 0x021FB0F4
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #4]
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	str r0, [sp, #8]
@@ -42827,7 +42827,7 @@ _021FB3FC: .word 0x3FB99999
 ov96_021FB400: ; 0x021FB400
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x11c
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #8]
 	add r0, #0x28
 	bl ov96_021E8A20
@@ -43149,7 +43149,7 @@ ov96_021FB630: ; 0x021FB630
 	cmp r0, #0
 	bne _021FB6B0
 	ldr r0, [sp, #8]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	ldr r0, [sp, #8]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -45394,7 +45394,7 @@ ov96_021FC768: ; 0x021FC768
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x34]
 	add r0, r4, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #6
 	bls _021FC782
 	b _021FCD68
@@ -45455,7 +45455,7 @@ _021FC79C:
 	add r0, r4, #0
 	add r2, r5, r2
 	mov r3, #0x78
-	bl ov96_021E5F70
+	bl PokeathlonCourse_SetField3A4
 	add r0, r4, #0
 	mov r1, #8
 	bl ov96_021E6670
@@ -45499,7 +45499,7 @@ _021FC79C:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 _021FC870:
 	ldr r0, [sp, #0x34]
@@ -45516,7 +45516,7 @@ _021FC870:
 	bl PokeathlonCourse_GetParticipantCount
 	add r5, r0, #0
 	add r0, r4, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r2, r0, #0
 	ldr r0, [sp, #0x34]
 	mov r1, #4
@@ -45537,7 +45537,7 @@ _021FC870:
 	lsl r2, r2, #2
 	str r0, [r1, r2]
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 _021FC8C6:
 	ldr r5, _021FCAA8 ; =ov96_0221C5E4
@@ -45637,7 +45637,7 @@ _021FC8C6:
 	ldr r2, [r2, r3]
 	bl ov96_02200180
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 _021FC9AC:
 	add r0, sp, #0x154
@@ -45739,7 +45739,7 @@ _021FC9B6:
 	ldr r0, [r0, r2]
 	bl ov96_02200B04
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 	.balign 4, 0
 _021FCA90: .word 0xFFFFE0FF
@@ -45764,10 +45764,10 @@ _021FCABE:
 	str r0, [sp, #0x30]
 	ldr r0, [sp, #0x34]
 	ldr r0, [r0]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	add r0, r4, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, sp, #0x50
 	mov r1, #0xaa
 	mov r2, #0xc
@@ -45998,7 +45998,7 @@ _021FCC92:
 	cmp r0, #0
 	bne _021FCCD2
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, #0
@@ -46030,7 +46030,7 @@ _021FCCD2:
 	mov r0, #1
 	bl sub_0203A994
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 _021FCD14:
 	add r0, r4, #0
@@ -46057,7 +46057,7 @@ _021FCD14:
 	bl ov96_02200E80
 _021FCD4A:
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _021FCD68
 _021FCD52:
 	mov r0, #0x5c
@@ -46094,7 +46094,7 @@ ov96_021FCD84: ; 0x021FCD84
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x1c
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -46103,7 +46103,7 @@ _021FCD98:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	lsl r0, r0, #0x10
 	lsr r3, r0, #0x10
 	lsr r0, r3, #0xa
@@ -46163,7 +46163,7 @@ ov96_021FCE10: ; 0x021FCE10
 	add r4, r0, #0
 	bl sub_0203A914
 	add r0, r5, #0
-	bl ov96_021E5F8C
+	bl PokeathlonCourse_ResetField3A4
 	ldr r0, [r4]
 	mov r1, #0
 	bl FreeBgTilemapBuffer
@@ -46805,7 +46805,7 @@ _021FD370:
 	strb r1, [r0]
 	ldr r0, [sp, #0xc]
 	mov r1, #0x12
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	b _021FD3D6
 _021FD3A0:
 	mov r0, #6
@@ -46832,7 +46832,7 @@ _021FD3C6:
 	beq _021FD3D6
 	ldr r0, [sp, #0xc]
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021FD3D6:
 	mov r0, #0
 	add sp, #0x2c
@@ -46900,7 +46900,7 @@ _021FD434:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _021FD464:
 	mov r0, #0
 	add sp, #0xc
@@ -46952,7 +46952,7 @@ _021FD4A0:
 	add r2, r2, r3
 	lsl r2, r2, #0x10
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, #0xd4
 	cmp r4, #4
@@ -46967,7 +46967,7 @@ ov96_021FD4D0: ; 0x021FD4D0
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x68
 	str r0, [sp, #4]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x2c]
 	ldr r0, [sp, #4]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -47809,7 +47809,7 @@ ov96_021FDB64: ; 0x021FDB64
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #4]
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r5, r0, #0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -47941,7 +47941,7 @@ ov96_021FDC7C: ; 0x021FDC7C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #8]
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -52338,7 +52338,7 @@ _021FFEE4: .word 0x00000644
 ov96_021FFEE8: ; 0x021FFEE8
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -55211,7 +55211,7 @@ ov96_02201558: ; 0x02201558
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r7, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #5
 	bls _02201570
 	b _02201AFE
@@ -55320,7 +55320,7 @@ _02201588:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02201AFE
 _0220166C:
 	ldr r0, [r7, #0x44]
@@ -55334,7 +55334,7 @@ _0220166C:
 	bl PokeathlonCourse_GetParticipantCount
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r2, r0, #0
 	mov r1, #4
 	ldr r0, [r7, #0x44]
@@ -55343,7 +55343,7 @@ _0220166C:
 	ldr r1, _022018E4 ; =0x000005DC
 	str r0, [r7, r1]
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02201AFE
 _022016A2:
 	ldr r4, _022018E8 ; =ov96_0221C7B8
@@ -55421,7 +55421,7 @@ _022016A2:
 	lsr r2, r2, #0x18
 	bl ov96_02201EF0
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02201AFE
 _0220175C:
 	add r0, r6, #0
@@ -55551,7 +55551,7 @@ _022017F2:
 	add r3, sp, #0xf8
 	bl ov96_021EA8A8
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02201AFE
 _02201874:
 	ldr r0, _022018F4 ; =0x000005D8
@@ -55568,10 +55568,10 @@ _02201882:
 	ldr r0, [r3]
 	str r0, [r2]
 	ldr r0, [r7]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	add r0, r6, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, r6, #0
 	bl ov96_021E5F24
 	mov r1, #0
@@ -55784,7 +55784,7 @@ _02201A56:
 	cmp r0, #0
 	bne _02201A8A
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, #0
@@ -55825,7 +55825,7 @@ _02201A8A:
 	mov r3, #0
 	bl BeginNormalPaletteFade
 	add r0, r6, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02201AFE
 _02201AE2:
 	bl IsPaletteFadeFinished
@@ -55872,7 +55872,7 @@ ov96_02201B34: ; 0x02201B34
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -55881,7 +55881,7 @@ _02201B48:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -55921,7 +55921,7 @@ ov96_02201B98: ; 0x02201B98
 	add r4, r0, #0
 	bl sub_0203A914
 	add r0, r7, #0
-	bl ov96_021E5F8C
+	bl PokeathlonCourse_ResetField3A4
 	ldr r0, [r4]
 	mov r1, #0
 	bl FreeBgTilemapBuffer
@@ -56630,7 +56630,7 @@ _0220219C:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _022021CC:
 	mov r0, #0
 	add sp, #0xc
@@ -56643,7 +56643,7 @@ ov96_022021D4: ; 0x022021D4
 	push {r3, r4, r5, r6, r7, lr}
 	add r6, r0, #0
 	add r4, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r5, r0, #0
 	add r0, r6, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -56680,7 +56680,7 @@ _02202218:
 	lsl r2, r2, #0x10
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, r5, #2
 	cmp r4, #4
@@ -56696,7 +56696,7 @@ ov96_0220223C: ; 0x0220223C
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0xa0
 	str r0, [sp, #4]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x24]
 	ldr r0, [sp, #4]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -57505,7 +57505,7 @@ ov96_022028BC: ; 0x022028BC
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -57577,7 +57577,7 @@ ov96_02202958: ; 0x02202958
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	str r0, [sp, #0x58]
@@ -59425,7 +59425,7 @@ _02203846:
 	lsl r1, r1, #0x18
 	ldr r0, [sp, #0x14]
 	lsr r1, r1, #0x18
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [sp, #0x10]
 	ldr r1, [r1, #0x44]
 	bl PlayerProfile_GetPlayerName_NewString
@@ -59488,7 +59488,7 @@ ov96_022038A0: ; 0x022038A0
 ov96_022038D4: ; 0x022038D4
 	push {r4, r5, r6, lr}
 	add r4, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r5, r0, #0
@@ -60420,7 +60420,7 @@ ov96_02203FFC: ; 0x02203FFC
 	lsl r0, r0, #0x18
 	lsr r1, r0, #0x18
 	ldr r0, [r5, #4]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5]
 	bl PlayerProfile_GetPlayerName_NewString
 	mov r1, #0
@@ -61356,7 +61356,7 @@ ov96_022047EC: ; 0x022047EC
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x38]
 	add r0, r4, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #6
 	bls _02204806
 	b _02204DD2
@@ -61419,7 +61419,7 @@ _02204820:
 	add r0, r4, #0
 	add r2, r5, r2
 	mov r3, #4
-	bl ov96_021E5F70
+	bl PokeathlonCourse_SetField3A4
 	add r0, r4, #0
 	mov r1, #8
 	bl ov96_021E6670
@@ -61463,7 +61463,7 @@ _02204820:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 _022048F8:
 	ldr r0, [sp, #0x38]
@@ -61480,7 +61480,7 @@ _022048F8:
 	bl PokeathlonCourse_GetParticipantCount
 	add r5, r0, #0
 	add r0, r4, #0
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r2, r0, #0
 	ldr r0, [sp, #0x38]
 	mov r1, #4
@@ -61501,7 +61501,7 @@ _022048F8:
 	lsl r2, r2, #2
 	str r0, [r1, r2]
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 _0220494E:
 	ldr r5, _02204B28 ; =ov96_0221CAD4
@@ -61601,7 +61601,7 @@ _0220494E:
 	ldr r2, [r2, r3]
 	bl ov96_02207F18
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 _02204A34:
 	add r0, sp, #0x11c
@@ -61703,7 +61703,7 @@ _02204A3E:
 	ldr r0, [r0, r2]
 	bl ov96_02208784
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 	.balign 4, 0
 _02204B18: .word 0xFFFFE0FF
@@ -61726,10 +61726,10 @@ _02204B3E:
 	str r0, [sp, #0x34]
 	ldr r0, [sp, #0x38]
 	ldr r0, [r0]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	add r0, r4, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, sp, #0x54
 	mov r1, #0xaa
 	mov r2, #0xe
@@ -61936,7 +61936,7 @@ _02204CE8:
 	cmp r0, #0
 	bne _02204D26
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, #0
@@ -61997,7 +61997,7 @@ _02204D26:
 	mov r0, #1
 	bl sub_0203A994
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 _02204DA6:
 	add r0, r4, #0
@@ -62013,7 +62013,7 @@ _02204DA6:
 	str r1, [r0, r2]
 _02204DC2:
 	add r0, r4, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02204DD2
 _02204DCA:
 	add sp, #0x1fc
@@ -62046,7 +62046,7 @@ ov96_02204DF8: ; 0x02204DF8
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -62055,7 +62055,7 @@ _02204E0C:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -62100,7 +62100,7 @@ ov96_02204E58: ; 0x02204E58
 	add r1, r0, #0
 	bl Main_SetHBlankIntrCB
 	add r0, r5, #0
-	bl ov96_021E5F8C
+	bl PokeathlonCourse_ResetField3A4
 	ldr r0, [r4, #0x18]
 	bl Heap_Free
 	ldr r0, [r4]
@@ -62616,7 +62616,7 @@ _022052D2:
 	b _02205466
 _022052D4:
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	mov r3, #0xde
@@ -62779,7 +62779,7 @@ _0220541C:
 	strb r1, [r0]
 	ldr r0, [sp, #0xc]
 	mov r1, #0x13
-	bl ov96_021E601C
+	bl PokeathlonCourse_SetStateTransitionType
 	b _02205466
 _02205430:
 	mov r0, #6
@@ -62806,7 +62806,7 @@ _02205456:
 	beq _02205466
 	ldr r0, [sp, #0xc]
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _02205466:
 	ldr r0, [sp, #0xc]
 	bl ov96_02205D30
@@ -62884,7 +62884,7 @@ _022054EA:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _0220551A:
 	mov r0, #0
 	add sp, #0xc
@@ -62896,7 +62896,7 @@ ov96_02205520: ; 0x02205520
 	push {r3, r4, r5, r6, r7, lr}
 	add r7, r0, #0
 	add r4, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r5, r0, #0
 	add r0, r7, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -62949,7 +62949,7 @@ _0220558A:
 	lsl r1, r4, #0x18
 	add r0, r7, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r6, r6, #2
 	add r5, r5, #4
@@ -62967,7 +62967,7 @@ ov96_022055AC: ; 0x022055AC
 	push {r3, r4, r5, r6, r7, lr}
 	sub sp, #0x78
 	str r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0x28]
 	ldr r0, [sp]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -63846,7 +63846,7 @@ ov96_02205C94: ; 0x02205C94
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -63918,7 +63918,7 @@ ov96_02205D30: ; 0x02205D30
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r5, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #8]
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -67970,7 +67970,7 @@ _02207C60:
 ov96_02207C64: ; 0x02207C64
 	push {r4, r5, r6, lr}
 	add r4, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r5, r0, #0
@@ -70716,7 +70716,7 @@ _0220918A:
 	bl ov96_021EB144
 	add r0, r6, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _022091AA
 _022091A6:
 	bl GF_AssertFail
@@ -70736,7 +70736,7 @@ ov96_022091B4: ; 0x022091B4
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	ldr r0, [r0, #0x10]
@@ -70902,7 +70902,7 @@ _02209320:
 	cmp r0, #0
 	bne _02209356
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	mov r1, #1
@@ -70966,7 +70966,7 @@ _02209394:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _022093C8:
 	mov r0, #0
 	add sp, #0xc
@@ -70992,7 +70992,7 @@ ov96_022093D0: ; 0x022093D0
 	add r2, r0, #0
 	add r0, r6, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	cmp r4, #0
 	bne _0220943E
 	add r0, r6, #0
@@ -71005,7 +71005,7 @@ ov96_022093D0: ; 0x022093D0
 	mul r5, r0
 _02209412:
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x50
 	add r0, r0, r5
 	bl ov96_021E8A20
@@ -71018,7 +71018,7 @@ _02209412:
 	add r0, r6, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, #0x28
 	cmp r4, #4
@@ -71040,7 +71040,7 @@ ov96_02209448: ; 0x02209448
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0x14]
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #7
 	bls _02209460
 	b _0220971E
@@ -71106,7 +71106,7 @@ _0220947C:
 	lsl r0, r0, #4
 	str r1, [r4, r0]
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _022094EE:
 	ldr r0, [sp, #0x14]
@@ -71142,7 +71142,7 @@ _022094EE:
 	ldr r1, [sp, #0x14]
 	str r0, [r1, #0x10]
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _02209546:
 	mov r5, #0
@@ -71210,7 +71210,7 @@ _022095A4:
 	add r3, sp, #0x18
 	bl ov96_021EA8A8
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _022095D2:
 	ldr r0, [sp, #0x14]
@@ -71240,7 +71240,7 @@ _022095E0:
 	mov r1, #0
 	bl Sprite_SetDrawPriority
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _02209618:
 	ldr r0, [sp, #0x14]
@@ -71256,7 +71256,7 @@ _02209618:
 	ldr r1, [sp, #0x14]
 	str r0, [r1, #0x40]
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _0220963C:
 	ldr r0, [sp, #0x14]
@@ -71302,12 +71302,12 @@ _0220968E:
 	bl ov96_02209F8C
 	ldr r0, [sp, #0x14]
 	ldr r0, [r0, #4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	mov r0, #1
 	bl sub_0203A994
 	ldr r0, [sp, #0xc]
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	mov r0, #0x10
 	mov r1, #1
 	bl GfGfx_EngineATogglePlanes
@@ -71334,7 +71334,7 @@ _022096D2:
 	add r2, r1, #0
 	bl BeginNormalPaletteFade
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _022096F2:
 	ldr r0, [sp, #0xc]
@@ -71347,7 +71347,7 @@ _02209702:
 	ldr r0, [sp, #0xc]
 	bl ov96_0220A4DC
 	ldr r0, [sp, #0xc]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02209722
 _02209710:
 	bl IsPaletteFadeFinished
@@ -71384,7 +71384,7 @@ ov96_02209748: ; 0x02209748
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -71393,7 +71393,7 @@ _0220975C:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -72628,7 +72628,7 @@ _0220A15A:
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r7, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	str r0, [sp, #4]
@@ -72985,7 +72985,7 @@ ov96_0220A424: ; 0x0220A424
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	bl ov96_021E8A20
 	add r5, r0, #0
 	ldr r0, [r4, #0x4c]
@@ -73072,7 +73072,7 @@ ov96_0220A4DC: ; 0x0220A4DC
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r5, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	cmp r5, #0
 	bne _0220A4FE
@@ -76421,7 +76421,7 @@ _0220BE8A:
 	cmp r7, #3
 	blt _0220BE8A
 	ldr r0, [sp, #0x34]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	ldr r1, [sp, #0x14]
 	mov r2, #0x28
 	add r0, #0x50
@@ -77095,7 +77095,7 @@ ov96_0220C40C: ; 0x0220C40C
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r6, r0, #0
@@ -78603,7 +78603,7 @@ ov96_0220CF50: ; 0x0220CF50
 	add r5, r0, #0
 	add r0, r2, #0
 	add r4, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	ldr r1, [r5, #0x18]
 	add r0, #0x50
 	lsr r2, r1, #0x1e
@@ -81095,7 +81095,7 @@ _0220E282:
 	beq _0220E29A
 	add r0, r6, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _0220E29A
 _0220E296:
 	bl GF_AssertFail
@@ -81112,7 +81112,7 @@ _0220E2A4: .word 0x00007FFF
 ov96_0220E2A8: ; 0x0220E2A8
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r0, r4, #0
@@ -81166,7 +81166,7 @@ _0220E31A:
 	add r0, r5, #0
 	bl ov96_0220F03C
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r2, r0, #0
@@ -81205,7 +81205,7 @@ _0220E31A:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _0220E386
 _0220E382:
 	bl GF_AssertFail
@@ -81250,7 +81250,7 @@ _0220E3C6:
 	add r0, r6, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, #0xe4
 	cmp r4, #4
@@ -81274,7 +81274,7 @@ ov96_0220E3F0: ; 0x0220E3F0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #3
 	bls _0220E408
 	b _0220E5C6
@@ -81333,7 +81333,7 @@ _0220E41C:
 	str r5, [r4, #4]
 	str r1, [r4, r0]
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _0220E5CA
 _0220E488:
 	ldr r0, [r4]
@@ -81355,7 +81355,7 @@ _0220E488:
 	add r0, r4, #0
 	bl ov96_0220F3FC
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _0220E5CA
 _0220E4C4:
 	ldr r0, [r4, #0x20]
@@ -81375,7 +81375,7 @@ _0220E4C4:
 	mov r1, #0
 	bl Sprite_SetDrawPriority
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _0220E5CA
 _0220E4F6:
 	add r0, r5, #0
@@ -81419,10 +81419,10 @@ _0220E4F6:
 	add r0, r4, r0
 	bl ov96_0220D420
 	ldr r0, [r4, #8]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, r4, #0
 	bl ov96_0220F4A0
 	add r0, r5, #0
@@ -81430,7 +81430,7 @@ _0220E4F6:
 	cmp r0, #0
 	bne _0220E5A2
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r6, r0, #0
@@ -81503,7 +81503,7 @@ ov96_0220E60C: ; 0x0220E60C
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -81512,7 +81512,7 @@ _0220E620:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -82818,7 +82818,7 @@ ov96_0220F03C: ; 0x0220F03C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r7, r0, #0
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0xc]
 	ldr r0, [sp]
 	bl ov96_021E5F24
@@ -83011,7 +83011,7 @@ ov96_0220F1CC: ; 0x0220F1CC
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r4, r0, #0
 	add r0, #0xf0
 	bl ov96_021E8A20
@@ -83613,7 +83613,7 @@ _0220F6B0:
 	cmp r0, #0
 	bne _0220F6D0
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, r6
@@ -83873,7 +83873,7 @@ ov96_0220F8C8: ; 0x0220F8C8
 	add r7, r1, #0
 	add r5, r0, #0
 	add r0, r7, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	mov r0, #0
@@ -84044,7 +84044,7 @@ ov96_0220FA18: ; 0x0220FA18
 	sub sp, #0x18
 	str r0, [sp, #4]
 	add r0, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	str r0, [sp, #8]
@@ -85016,7 +85016,7 @@ ov96_0221013C: ; 0x0221013C
 	add r5, r0, #0
 	add r0, r1, #0
 	str r1, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -85759,7 +85759,7 @@ _022106C6:
 _022106E4:
 	ldr r0, [r5]
 	add r1, r4, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5, #4]
 	bl PlayerProfile_GetPlayerName_NewString
 	lsl r7, r7, #4
@@ -86527,7 +86527,7 @@ ov96_02210C98: ; 0x02210C98
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #5
 	bls _02210CB4
 	bl _02211626
@@ -86650,7 +86650,7 @@ _02210DA0:
 	strb r1, [r0, #9]
 	bl GfGfx_SwapDisplay
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	bl _02211626
 _02210DCE:
 	ldr r0, [r4, #0x58]
@@ -86664,7 +86664,7 @@ _02210DCE:
 	bl PokeathlonCourse_GetParticipantCount
 	add r5, r0, #0
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5EE8
+	bl PokeathlonCourse_GetMode
 	add r2, r0, #0
 	mov r1, #4
 	ldr r0, [r4, #0x58]
@@ -86681,7 +86681,7 @@ _02210DCE:
 	ldr r0, [sp, #0x14]
 	bl ov96_021E64B8
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	bl _02211626
 _02210E1A:
 	ldr r5, _02211098 ; =ov96_0221D238
@@ -87101,7 +87101,7 @@ _022111A6:
 	ldr r2, [r4, r2]
 	bl ov96_02214718
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02211626
 _022111D4:
 	mov r5, #0
@@ -87148,7 +87148,7 @@ _022111DA:
 	add r3, sp, #0x190
 	bl ov96_021EA8A8
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02211626
 _0221123C:
 	ldr r0, _02211438 ; =0x00000748
@@ -87162,10 +87162,10 @@ _0221124A:
 	bl ov96_021E5F24
 	str r0, [sp, #0x50]
 	ldr r0, [r4, #4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, [sp, #0x14]
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, sp, #0x9c
 	mov r1, #0xaa
 	mov r2, #0xb
@@ -87558,7 +87558,7 @@ _022115A0:
 	cmp r0, #0
 	bne _022115BE
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	add r1, r0, #0
@@ -87599,7 +87599,7 @@ _022115BE:
 	mov r3, #0
 	bl BeginNormalPaletteFade
 	ldr r0, [sp, #0x14]
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02211626
 _02211616:
 	bl IsPaletteFadeFinished
@@ -87642,7 +87642,7 @@ ov96_02211660: ; 0x02211660
 	add r5, r0, #0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r0, r5, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -87651,7 +87651,7 @@ _0221167A:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -87861,7 +87861,7 @@ _02211834:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 _0221186A:
 	mov r0, #0
 	add sp, #0xc
@@ -87903,7 +87903,7 @@ _022118A4:
 	add r0, r6, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, r5, #4
 	cmp r4, #4
@@ -88174,7 +88174,7 @@ ov96_02211AF0: ; 0x02211AF0
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r6, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	bl ov96_021E8A20
 	add r4, r0, #0
@@ -88245,7 +88245,7 @@ ov96_02211B94: ; 0x02211B94
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x14
 	str r0, [sp, #4]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #0xc]
 	ldr r0, [sp, #4]
 	bl PokeathlonCourse_GetHeapAllocPtr4
@@ -88715,7 +88715,7 @@ ov96_02211F38: ; 0x02211F38
 	lsr r0, r0, #0x18
 	str r0, [sp, #0x10]
 	ldr r0, [sp, #8]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r6, r0, #0
@@ -89218,7 +89218,7 @@ ov96_0221236C: ; 0x0221236C
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	ldr r1, [r0, #0x1c]
@@ -93167,7 +93167,7 @@ ov96_022140F4: ; 0x022140F4
 _02214140:
 	ldr r0, [sp, #8]
 	add r1, r4, #0
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5, #0x58]
 	bl PlayerProfile_GetPlayerName_NewString
 	add r6, r0, #0
@@ -93845,7 +93845,7 @@ _02214614: .word ov96_0221454C
 ov96_02214618: ; 0x02214618
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r0, r5, #0
@@ -94077,7 +94077,7 @@ ov96_022147FC: ; 0x022147FC
 	lsl r0, r0, #0x18
 	lsr r1, r0, #0x18
 	ldr r0, [r5, #4]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5]
 	bl PlayerProfile_GetPlayerName_NewString
 	mov r1, #0
@@ -96498,7 +96498,7 @@ _022159CC:
 	beq _022159E4
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _022159E4
 _022159E0:
 	bl GF_AssertFail
@@ -96560,7 +96560,7 @@ _02215A22:
 	bl BeginNormalPaletteFade
 	add r0, r5, #0
 	mov r1, #2
-	bl ov96_021E5FC8
+	bl PokeathlonCourse_SetStateField07
 	b _02215A64
 _02215A60:
 	bl GF_AssertFail
@@ -96602,7 +96602,7 @@ _02215A9C:
 	add r0, r6, #0
 	lsr r1, r1, #0x18
 	lsr r2, r2, #0x10
-	bl ov96_021E5FB0
+	bl PokeathlonCourse_SetField5E0_AtIndex
 	add r4, r4, #1
 	add r5, #0xa8
 	cmp r4, #4
@@ -96625,7 +96625,7 @@ ov96_02215AC4: ; 0x02215AC4
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r5, #0
-	bl ov96_021E5DD4
+	bl PokeathlonCourse_GetField1ED
 	cmp r0, #4
 	bls _02215ADC
 	b _02215CA0
@@ -96684,7 +96684,7 @@ _02215AF2:
 	ldr r0, _02215CC0 ; =0x00000438
 	str r1, [r4, r0]
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02215CA4
 _02215B5C:
 	ldr r0, [r4]
@@ -96705,7 +96705,7 @@ _02215B5C:
 	add r1, r5, #0
 	bl ov96_02217AE4
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02215CA4
 _02215B94:
 	ldr r0, [r4, #0x1c]
@@ -96727,7 +96727,7 @@ _02215BA0:
 	mov r1, #0
 	bl Sprite_SetDrawPriority
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02215CA4
 _02215BC8:
 	add r0, r5, #0
@@ -96757,7 +96757,7 @@ _02215BC8:
 	lsl r1, r1, #6
 	str r0, [r4, r1]
 	add r0, r5, #0
-	bl ov96_021E5DEC
+	bl PokeathlonCourse_IncrementField1ED
 	b _02215CA4
 _02215C0A:
 	add r0, r4, #0
@@ -96780,7 +96780,7 @@ _02215C0A:
 	add r0, r4, r0
 	bl ov96_02217544
 	ldr r0, [r4, #4]
-	bl ov96_021E6030
+	bl PokeathlonCourse_SetVBlankIntrCB
 	ldr r0, _02215CC8 ; =0x000007F8
 	ldr r1, [r4, #4]
 	ldr r2, [r4, #8]
@@ -96788,13 +96788,13 @@ _02215C0A:
 	bl ov96_0221587C
 	add r0, r5, #0
 	mov r1, #1
-	bl ov96_021E5DFC
+	bl PokeathlonCourse_SetField1F4
 	add r0, r5, #0
 	bl ov96_021E5F24
 	cmp r0, #0
 	bne _02215C84
 	add r0, r5, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	ldr r2, [r0, #0x20]
@@ -96860,7 +96860,7 @@ ov96_02215CE8: ; 0x02215CE8
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	add r5, r0, #0
-	bl ov96_021E6040
+	bl PokeathlonCourse_GetGraphicsSystem
 	add r6, r0, #0
 	bl ov96_021E9510
 	mov r4, #0
@@ -96869,7 +96869,7 @@ _02215CFC:
 	lsl r1, r4, #0x18
 	add r0, r5, #0
 	lsr r1, r1, #0x18
-	bl ov96_021E5FBC
+	bl PokeathlonCourse_GetField5F0_AtIndex
 	add r3, r0, #0
 	str r7, [sp]
 	mov r0, #3
@@ -97258,7 +97258,7 @@ ov96_02215FC8: ; 0x02215FC8
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	str r0, [sp, #0xc]
 	ldr r0, [sp]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	str r0, [sp, #4]
 	add r0, #0x28
 	bl ov96_021E8A20
@@ -97529,7 +97529,7 @@ _022161FC: .word 0x0000043C
 ov96_02216200: ; 0x02216200
 	push {r3, r4, r5, lr}
 	add r4, r0, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	add r0, r4, #0
@@ -97556,7 +97556,7 @@ ov96_02216234: ; 0x02216234
 	bl PokeathlonCourse_GetHeapAllocPtr4
 	add r4, r0, #0
 	add r0, r6, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r7, r0, #0
 	bl ov96_021E8A20
 	add r7, #0xf0
@@ -98604,7 +98604,7 @@ ov96_02216AA4: ; 0x02216AA4
 	str r2, [sp, #0xc]
 	str r3, [sp, #0x10]
 	ldr r4, [sp, #0x40]
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r6, r0, #0
 	ldrb r1, [r5]
 	add r0, sp, #0x24
@@ -100090,7 +100090,7 @@ ov96_0221768C: ; 0x0221768C
 	add r4, r1, #0
 	add r7, r0, #0
 	add r0, r4, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0xf0
 	bl ov96_021E8A20
 	str r0, [sp, #8]
@@ -101722,7 +101722,7 @@ ov96_02218330: ; 0x02218330
 	mov r0, #0
 	str r0, [sp, #4]
 	add r0, r1, #0
-	bl ov96_021E5F54
+	bl PokeathlonCourse_GetDataCopyArea
 	add r0, #0x28
 	bl ov96_021E8A20
 	str r0, [sp, #8]
@@ -104920,7 +104920,7 @@ ov96_02219B30: ; 0x02219B30
 	add r1, #0x22
 	ldrb r1, [r1]
 	ldr r0, [r5]
-	bl ov96_021E5F34
+	bl PokeathlonCourse_GetPlayerProfileFromData
 	ldr r1, [r5, #4]
 	bl PlayerProfile_GetPlayerName_NewString
 	mov r1, #0
@@ -106679,7 +106679,7 @@ ov96_0221A920:
 	.word ov96_021F553C
 	.word 1
 
-	.public ov96_0221A934
+	.global ov96_0221A934
 ov96_0221A934: ; 0x0221A934
 	.byte 0x00, 0x01, 0x06, 0x0A, 0x03, 0x02, 0x09, 0x0A, 0x08, 0x09, 0x01, 0x0A
 	.byte 0x07, 0x06, 0x03, 0x0A, 0x05, 0x04, 0x00, 0x0A, 0x00, 0x05, 0x04, 0x06, 0x05, 0x04, 0x01, 0x08
