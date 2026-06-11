@@ -34,6 +34,14 @@ typedef struct PokeathlonFieldData {
     u8 data[0x60]; // Opaque data for now
 } PokeathlonFieldData;
 
+// Sprite task slot (16 bytes) — tracks a sprite managed by a SysTask
+typedef struct PokeathlonSpriteTask {
+    u32 active;   // 0x00 - 1 if slot is in use
+    u32 arg;      // 0x04 - caller-provided arg
+    void *sprite; // 0x08 - sprite pointer
+    void *task;   // 0x0C - SysTask handle
+} PokeathlonSpriteTask;
+
 // Pokeathlon course arguments structure
 typedef struct PokeathlonCourseArgs {
     SaveData *saveData; // 0x000 - Save data pointer
@@ -104,9 +112,19 @@ struct PokeathlonCourseData {
     PlayerProfile* playerProfiles;             // 0x5DC - Player profiles pointer (heap allocated, 4 profiles)
     u8 filler_5E0[0x34];                       // 0x5E0
     void *graphicsSystem;                      // 0x614 - Graphics/UI subsystem pointer
-    u8 filler_618[0x112];                      // 0x618
+    u8 filler_618[0xF0];                       // 0x618
+    void *field_708;                           // 0x708 - sprite pointer (primary)
+    u8 field_70C;                              // 0x70C - animation frame counter
+    u8 field_70D;                              // 0x70D - flag byte
+    u16 field_70E;                             // 0x70E - saved arg (u16)
+    void *field_710;                           // 0x710 - sprite pointer
+    void *field_714;                           // 0x714 - sprite pointer
+    u8 filler_718[0x4];                        // 0x718
+    void *field_71C[3];                        // 0x71C - sprite pointer array (3 slots)
+    u8 field_728;                              // 0x728 - sprite count
+    u8 field_729;                              // 0x729 - sub-state counter
     u8 maxParticipants;                        // 0x72A - Maximum participant limit (3 or 4)
-    u8 filler_72B[1];                          // 0x72B
+    u8 field_72B;                              // 0x72B - last-seen animation sequence index
     PokeathlonFieldData field_72C[11];         // 0x72C - Array of PokeathlonFieldData (11 * 0x60 = 0x420 bytes)
     u8 filler_B4C[0x58];                       // 0xB4C
     u8 filler_BA4[0x180];                      // 0xBA4
@@ -114,7 +132,8 @@ struct PokeathlonCourseData {
     u16 frameTimer;                            // 0xD28 - Frame counter, resets at 0x708
     u16 filler_D2A;                            // 0xD2A - Alignment padding
     u32 counterEnabled;                        // 0xD2C - Flag to enable frame counters
-    u8 filler_D30[0x34];                       // 0xD30
+    u32 field_D30;                             // 0xD30 - sprite task count
+    PokeathlonSpriteTask spriteTasks[3];       // 0xD34 - 3 * 16 = 48 bytes
     void *heapAllocPtr2;                       // 0xD64 - Heap allocated pointer (freed in Exit if mode == 0)
     void *heapAllocPtr3;                       // 0xD68 - Heap allocated pointer (freed in Exit if mode == 0)
     u8 filler_D6C[4];                          // 0xD6C
@@ -184,5 +203,22 @@ void ov96_021E604C(PokeathlonCourseData *data);
 void *ov96_021E60C0(PokeathlonCourseData *data, int a1, int a2);
 void *ov96_021E60D8(PokeathlonCourseData *data, int a1, int a2);
 u32 ov96_021E6104(void);
+
+// Overlay 96 phase 3 — pokeathlon_course_util.c (15 more functions)
+u8 ov96_021E6108(void *p);
+u8 ov96_021E6138(void *p);
+void ov96_021E6168(PokeathlonCourseData *data, int partIndex, int slot, void *dest);
+void *ov96_021E61D8(PokeathlonCourseData *data, int a1, int a2, int a3);
+void *ov96_021E6290(PokeathlonCourseData *data, int a1, int a2, int a3);
+void ov96_021E62AC(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u32 count, const u16 *positions);
+void ov96_021E634C(PokeathlonCourseData *data, int a2, int a3, int a4, int a5, u8 count, const u16 *positions);
+BOOL ov96_021E637C(PokeathlonCourseData *data);
+void ov96_021E6454(PokeathlonCourseData *data, int param);
+void ov96_021E64B8(PokeathlonCourseData *data);
+void *ov96_021E64F8(PokeathlonCourseData *data, u32 a1, u32 a2, u32 a3, u32 a4);
+void ov96_021E6550(PokeathlonCourseData *data);
+void ov96_021E658C(PokeathlonCourseData *data, int index, int seq);
+void ov96_021E65A4(PokeathlonCourseData *data);
+void ov96_021E65D8(PokeathlonCourseData *data);
 
 #endif // POKEHEARTGOLD_POKEATHLON_H
